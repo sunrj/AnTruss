@@ -26,6 +26,6 @@ The source code of each algorithm has five parameters, corresponding to the algo
 
 ## Datasets
 
-ToWe provide five datasets in the folder "sample_dataset" for testing, D1 to D8.
+To save space, we only provide four datasets in the folder "dataset" for testing, other datasets can be found on https://snap.stanford.edu/data/index.html
 
 
