@@ -11,16 +11,16 @@ Each algorithm has only two parameter, graph G and budget b.
 * Running example for Algorithms GAS
 
   Take **GAS** as an example, we first replace the datasets which is need to be tested, and set budget in main.cpp.
-  > g++ -std=c++11 GAS.cpp -O3 -o GAS
+  > g++ -std=c++11 main.cpp -o program -I.
   >
-  > ./GAS GAS
+  > ./GAS 
 
 
 ## Datasets
 
 To save space, we only provide four datasets in the folder "dataset" for testing, other datasets can be found on https://snap.stanford.edu/data/index.html
 
-Folder "datasets/subgraphs" contains 20 subgraphs that are extracted from facebook and brightkites.
+Folder "datasets/subgraphs" contains 20 subgraphs that are extracted from Facebook and Brightkites.
 
 
 | Datasets | \|V\| | \|E\| |   Link |
