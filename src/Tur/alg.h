@@ -37,7 +37,7 @@ struct Edge {
 };
 
 bool routecmp(const routesize& a, const routesize& b) {
-    return a.size > b.size; // °´ÕÕ size ÉıĞòÅÅĞò
+    return a.size > b.size; // æŒ‰ç…§ size å‡åºæ’åº
 }
 
 int Get_route_size(Graph& G, int& anchor_edge, vector<pair<int, int>>& hull_pair, int& max_layer)
@@ -49,40 +49,40 @@ int Get_route_size(Graph& G, int& anchor_edge, vector<pair<int, int>>& hull_pair
     const int size = G.m + 1;
     //vector<std::unordered_set<int>> neighbor_hash = G.neighbor_hash;
 
-    //std::unordered_map<int, vector<int>> res;     //´æ´¢Éú´æµÄ±ß£¬Ò²¾ÍÊÇ¸úËæÕß,¶Ôfollower°´ÕÕÊ÷½á¹¹½øĞĞ·ÖÀà
+    //std::unordered_map<int, vector<int>> res;     //å­˜å‚¨ç”Ÿå­˜çš„è¾¹ï¼Œä¹Ÿå°±æ˜¯è·Ÿéšè€…,å¯¹followeræŒ‰ç…§æ ‘ç»“æ„è¿›è¡Œåˆ†ç±»
 
 
-    map<int, priority_queue<Edge>> classified_edges;   //µÚÒ»¸öÖµÎªk µÚ¶ş¸öÎª¶ÔÓ¦layer²ã µÄ±ß¼¯ºÏ
+    map<int, priority_queue<Edge>> classified_edges;   //ç¬¬ä¸€ä¸ªå€¼ä¸ºk ç¬¬äºŒä¸ªä¸ºå¯¹åº”layerå±‚ çš„è¾¹é›†åˆ
 
     bool* ifexist = (bool*)mmap(nullptr, size * sizeof(bool), PROT_READ | PROT_WRITE, MAP_ANONYMOUS | MAP_PRIVATE, -1, 0);
     //vector<bool> ifexist(size, false);
     //bool* ifexist = new bool[size]();
-    //bool ifexist[G.m];  //±ê¼Ç¸Ã±ßÊÇÒÑ¾­ÔÚ´ı´¦ÀíµÄ¼¯ºÏÖĞ  ¹şÏ£´æ´¢¼ÓËÙ¼ÆËã
+    //bool ifexist[G.m];  //æ ‡è®°è¯¥è¾¹æ˜¯å·²ç»åœ¨å¾…å¤„ç†çš„é›†åˆä¸­  å“ˆå¸Œå­˜å‚¨åŠ é€Ÿè®¡ç®—
     //memset(ifexist, false, sizeof(ifexist));
 
     int x = G.edge2[anchor_edge].first;
     int y = G.edge2[anchor_edge].second;
 
-    for (int i = 0; i < G.neighbor[x].size(); i++)   //½«°üº¬anchorµÄÈı½ÇĞÎµÄ±ß°´Ê÷½á¹¹·ÖÀà
+    for (int i = 0; i < G.neighbor[x].size(); i++)   //å°†åŒ…å«anchorçš„ä¸‰è§’å½¢çš„è¾¹æŒ‰æ ‘ç»“æ„åˆ†ç±»
     {
         int w = G.neighbor[x][i];
-        if (G.edge.find(pair<int, int>(y, w)) != G.edge.end())   //ÕÒµ½Ò»¸öÈı½ÇĞÎ
+        if (G.edge.find(pair<int, int>(y, w)) != G.edge.end())   //æ‰¾åˆ°ä¸€ä¸ªä¸‰è§’å½¢
         {
             int e_1 = G.edge[pair<int, int>(x, w)];
             int e_2 = G.edge[pair<int, int>(y, w)];
 
 
-            if (hull_pair[e_1].first > hull_pair[e_2].first)  //e_1ÊÇtrussnessĞ¡µÄÄÇÌõ±ß
+            if (hull_pair[e_1].first > hull_pair[e_2].first)  //e_1æ˜¯trussnesså°çš„é‚£æ¡è¾¹
             {
                 int temp = e_1;
                 e_1 = e_2;
-                e_2 = temp;       //½»»»Öµ
+                e_2 = temp;       //äº¤æ¢å€¼
             }
 
 
-            if (hull_pair[e_1].first == hull_pair[e_2].first && hull_pair[e_1].first == hull_pair[anchor_edge].first)      //ÈôÈı½ÇĞÎµÄÆäËûÁ½Ìõ±ßtrussnessºÍanchor±ßÒ»Ñù´ó  
+            if (hull_pair[e_1].first == hull_pair[e_2].first && hull_pair[e_1].first == hull_pair[anchor_edge].first)      //è‹¥ä¸‰è§’å½¢çš„å…¶ä»–ä¸¤æ¡è¾¹trussnesså’Œanchorè¾¹ä¸€æ ·å¤§  
             {
-                if (hull_pair[e_1].second > hull_pair[anchor_edge].second && hull_pair[e_2].second > hull_pair[anchor_edge].second)  //²¢ÇÒÕâÁ½Ìõ±ßÔÚanchor_edgeµÄÄÚ²ã
+                if (hull_pair[e_1].second > hull_pair[anchor_edge].second && hull_pair[e_2].second > hull_pair[anchor_edge].second)  //å¹¶ä¸”è¿™ä¸¤æ¡è¾¹åœ¨anchor_edgeçš„å†…å±‚
                 {
 
                     ifexist[e_1] = true;
@@ -92,7 +92,7 @@ int Get_route_size(Graph& G, int& anchor_edge, vector<pair<int, int>>& hull_pair
                     e1.layer = hull_pair[e_1].second;
                     e2.id = e_2;
                     e2.layer = hull_pair[e_2].second;
-                    if (classified_edges.find(hull_pair[anchor_edge].first) == classified_edges.end())   //ÈômapÖĞÃ»ÓĞ
+                    if (classified_edges.find(hull_pair[anchor_edge].first) == classified_edges.end())   //è‹¥mapä¸­æ²¡æœ‰
                     {
 
                         priority_queue<Edge> buffer;
@@ -102,8 +102,8 @@ int Get_route_size(Graph& G, int& anchor_edge, vector<pair<int, int>>& hull_pair
                     }
                     else
                     {
-                        classified_edges[hull_pair[anchor_edge].first].push(e1);  //½«¸Ã±ß´æÈë¶ÔÓ¦¶ÓÁĞ
-                        classified_edges[hull_pair[anchor_edge].first].push(e2);  //½«¸Ã±ß´æÈë¶ÔÓ¦¶ÓÁĞ
+                        classified_edges[hull_pair[anchor_edge].first].push(e1);  //å°†è¯¥è¾¹å­˜å…¥å¯¹åº”é˜Ÿåˆ—
+                        classified_edges[hull_pair[anchor_edge].first].push(e2);  //å°†è¯¥è¾¹å­˜å…¥å¯¹åº”é˜Ÿåˆ—
                     }
 
 
@@ -112,15 +112,15 @@ int Get_route_size(Graph& G, int& anchor_edge, vector<pair<int, int>>& hull_pair
             }
 
 
-            if (hull_pair[anchor_edge].first == hull_pair[e_1].first && hull_pair[anchor_edge].first < hull_pair[e_2].first)                // ÈıÌõ±ßtrussness´óĞ¡ÊÇanchor_edge=e_1  e_2>e_1  e_2>anchor_edge
+            if (hull_pair[anchor_edge].first == hull_pair[e_1].first && hull_pair[anchor_edge].first < hull_pair[e_2].first)                // ä¸‰æ¡è¾¹trussnesså¤§å°æ˜¯anchor_edge=e_1  e_2>e_1  e_2>anchor_edge
             {
-                if (hull_pair[anchor_edge].second < hull_pair[e_1].second)    //²¢ÇÒÔÚanchoredgeµÄÄÚ²ã
+                if (hull_pair[anchor_edge].second < hull_pair[e_1].second)    //å¹¶ä¸”åœ¨anchoredgeçš„å†…å±‚
                 {
                     ifexist[e_1] = true;
                     Edge e1;
                     e1.id = e_1;
                     e1.layer = hull_pair[e_1].second;
-                    if (classified_edges.find(hull_pair[anchor_edge].first) == classified_edges.end())   //ÈômapÖĞÃ»ÓĞ
+                    if (classified_edges.find(hull_pair[anchor_edge].first) == classified_edges.end())   //è‹¥mapä¸­æ²¡æœ‰
                     {
                         priority_queue<Edge> buffer;
                         buffer.push(e1);
@@ -129,14 +129,14 @@ int Get_route_size(Graph& G, int& anchor_edge, vector<pair<int, int>>& hull_pair
                     }
                     else
                     {
-                        classified_edges[hull_pair[anchor_edge].first].push(e1);  //½«¸Ã±ß´æÈë¶ÔÓ¦¶ÓÁĞ
+                        classified_edges[hull_pair[anchor_edge].first].push(e1);  //å°†è¯¥è¾¹å­˜å…¥å¯¹åº”é˜Ÿåˆ—
                     }
                 }
             }
 
-            if (hull_pair[anchor_edge].first < hull_pair[e_1].first && hull_pair[anchor_edge].first < hull_pair[e_2].first)    //ÁíÍâÁ½Ìõ±ßµÄtrussness¶¼±Èanchoredge´ó
+            if (hull_pair[anchor_edge].first < hull_pair[e_1].first && hull_pair[anchor_edge].first < hull_pair[e_2].first)    //å¦å¤–ä¸¤æ¡è¾¹çš„trussnesséƒ½æ¯”anchoredgeå¤§
             {
-                if (hull_pair[e_1].first == hull_pair[e_2].first && hull_pair[e_2].first != INF)  //ÁíÍâÁ½Ìõ±ßµÄtrussnessÒ»Ñù´ó
+                if (hull_pair[e_1].first == hull_pair[e_2].first && hull_pair[e_2].first != INF)  //å¦å¤–ä¸¤æ¡è¾¹çš„trussnessä¸€æ ·å¤§
                 {
                     ifexist[e_1] = true;
                     ifexist[e_2] = true;
@@ -145,7 +145,7 @@ int Get_route_size(Graph& G, int& anchor_edge, vector<pair<int, int>>& hull_pair
                     e1.layer = hull_pair[e_1].second;
                     e2.id = e_2;
                     e2.layer = hull_pair[e_2].second;
-                    if (classified_edges.find(hull_pair[e_1].first) == classified_edges.end())   //ÈômapÖĞÃ»ÓĞ
+                    if (classified_edges.find(hull_pair[e_1].first) == classified_edges.end())   //è‹¥mapä¸­æ²¡æœ‰
                     {
                         priority_queue<Edge> buffer;
                         buffer.push(e1);
@@ -153,10 +153,10 @@ int Get_route_size(Graph& G, int& anchor_edge, vector<pair<int, int>>& hull_pair
                     }
                     else
                     {
-                        classified_edges[hull_pair[e_1].first].push(e1);  //½«¸Ã±ß´æÈë¶ÔÓ¦¶ÓÁĞ
+                        classified_edges[hull_pair[e_1].first].push(e1);  //å°†è¯¥è¾¹å­˜å…¥å¯¹åº”é˜Ÿåˆ—
                     }
 
-                    if (classified_edges.find(hull_pair[e_2].first) == classified_edges.end())   //ÈômapÖĞÃ»ÓĞ
+                    if (classified_edges.find(hull_pair[e_2].first) == classified_edges.end())   //è‹¥mapä¸­æ²¡æœ‰
                     {
                         priority_queue<Edge> buffer;
                         buffer.push(e2);
@@ -164,18 +164,18 @@ int Get_route_size(Graph& G, int& anchor_edge, vector<pair<int, int>>& hull_pair
                     }
                     else
                     {
-                        classified_edges[hull_pair[e_2].first].push(e2);  //½«¸Ã±ß´æÈë¶ÔÓ¦¶ÓÁĞ
+                        classified_edges[hull_pair[e_2].first].push(e2);  //å°†è¯¥è¾¹å­˜å…¥å¯¹åº”é˜Ÿåˆ—
                     }
 
                 }
 
-                if (hull_pair[e_1].first < hull_pair[e_2].first)   //ÁíÍâÁ½Ìõ±ßµÄtrussnessÒ»´óÒ»Ğ¡
+                if (hull_pair[e_1].first < hull_pair[e_2].first)   //å¦å¤–ä¸¤æ¡è¾¹çš„trussnessä¸€å¤§ä¸€å°
                 {
                     ifexist[e_1] = true;
                     Edge e1;
                     e1.id = e_1;
                     e1.layer = hull_pair[e_1].second;
-                    if (classified_edges.find(hull_pair[e_1].first) == classified_edges.end())   //ÈômapÖĞÃ»ÓĞ
+                    if (classified_edges.find(hull_pair[e_1].first) == classified_edges.end())   //è‹¥mapä¸­æ²¡æœ‰
                     {
                         priority_queue<Edge> buffer;
                         buffer.push(e1);
@@ -183,14 +183,14 @@ int Get_route_size(Graph& G, int& anchor_edge, vector<pair<int, int>>& hull_pair
                     }
                     else
                     {
-                        classified_edges[hull_pair[e_1].first].push(e1);  //½«¸Ã±ß´æÈë¶ÔÓ¦¶ÓÁĞ
+                        classified_edges[hull_pair[e_1].first].push(e1);  //å°†è¯¥è¾¹å­˜å…¥å¯¹åº”é˜Ÿåˆ—
                     }
                 }
             }
 
         }
     }
-    //¹ã¶ÈËÑË÷Ã¿¸öÊ÷½ÚµãµÄpath
+    //å¹¿åº¦æœç´¢æ¯ä¸ªæ ‘èŠ‚ç‚¹çš„path
 
 
 
@@ -204,15 +204,15 @@ int Get_route_size(Graph& G, int& anchor_edge, vector<pair<int, int>>& hull_pair
 
 
     int a = 0;
-    std::unordered_set<int> suv;            //ÒÔ¹şÏ£±íµÄĞÎÊ½´æ´¢´æ»îµÄ±ß
+    std::unordered_set<int> suv;            //å­˜å‚¨å­˜æ´»çš„è¾¹
     //unordered_set<int> discard;
     //unordered_set<int> visited;
 
-    for (auto iter = classified_edges.begin(); iter != classified_edges.end(); iter++)   //Ò»´Î´¦ÀíÒ»¸ötreenode
+    for (auto iter = classified_edges.begin(); iter != classified_edges.end(); iter++)   //ä¸€æ¬¡å¤„ç†ä¸€ä¸ªheap
     {
 
 
-        //int heapid = iter->first;   //µÃµ½treeid
+        //int heapid = iter->first;   //å¾—åˆ°treeid
        // if (reuseable_node.find(treeid) != reuseable_node.end()) continue;
 
 
@@ -232,7 +232,7 @@ int Get_route_size(Graph& G, int& anchor_edge, vector<pair<int, int>>& hull_pair
         bool* visited = (bool*)mmap(nullptr, size * sizeof(bool), PROT_READ | PROT_WRITE, MAP_ANONYMOUS | MAP_PRIVATE, -1, 0);
         bool* discard = (bool*)mmap(nullptr, size * sizeof(bool), PROT_READ | PROT_WRITE, MAP_ANONYMOUS | MAP_PRIVATE, -1, 0);
         //bool* discard = new bool[size]();
-        //bool* visited = new bool[size]();      //±ê¼Ç¸Ã±ßÊÇ·ñ´¦Àí¹ı
+        //bool* visited = new bool[size]();      //æ ‡è®°è¯¥è¾¹æ˜¯å¦å¤„ç†è¿‡
         //int* s = new int[size]();
        // std::fill(discard, discard + G.m+1, false);
        // std::fill(visited, visited + G.m+1, false);
@@ -242,11 +242,11 @@ int Get_route_size(Graph& G, int& anchor_edge, vector<pair<int, int>>& hull_pair
 
         //fuck++;
         visited[anchor_edge] = true;
-        suv.insert(anchor_edge);   //ÉèÖÃanchor edgeÎª´æ»î.
-        //vector<int> s(G.m + 1, 0);                    //´æ´¢±ßµÄsupport upper bound, ³õÊ¼»¯Îª0
+        suv.insert(anchor_edge);   //è®¾ç½®anchor edgeä¸ºå­˜æ´».
+        //vector<int> s(G.m + 1, 0);                    //å­˜å‚¨è¾¹çš„support upper bound, åˆå§‹åŒ–ä¸º0
 
 
-        //½øĞĞlayer by layer search
+        //è¿›è¡Œlayer by layer search
 
 
         int K = iter->first;
@@ -271,19 +271,19 @@ int Get_route_size(Graph& G, int& anchor_edge, vector<pair<int, int>>& hull_pair
 
 
 
-            //if (sup >= K - 1)                       //Èôsupport upper×î´óµÄ±ßÂú×ãÒªÇó£¬Ôò´¦Àí¸Ã±ß
+            //if (sup >= K - 1)                       //è‹¥support upperæœ€å¤§çš„è¾¹æ»¡è¶³è¦æ±‚ï¼Œåˆ™å¤„ç†è¯¥è¾¹
             {
 
                 // auto start_SLA = std::chrono::high_resolution_clock::now();
-                if (visited[e] == false)             //·ÀÖ¹ÖØ¸´¼ÆËã
+                if (visited[e] == false)             //é˜²æ­¢é‡å¤è®¡ç®—
                 {
-                    suv.insert(e);                     //¼ÓÈësuv¼¯ºÏ
-                    //¼ÆËãstrong triangle
+                    suv.insert(e);                     //åŠ å…¥suvé›†åˆ
+                    //è®¡ç®—strong triangle
                     //s[e] = sup;
                     int u = G.edge2[e].first;
                     int v = G.edge2[e].second;
 
-                    //if (G.neighbor_hash[v].size() < G.neighbor_hash[u].size())   //±È½ÏÁ½Õß¶ÈÊı£¬°ÑÁÚ¾ÓÊıÁ¿¶àµÄ¸³¸øx
+                    //if (G.neighbor_hash[v].size() < G.neighbor_hash[u].size())   //æ¯”è¾ƒä¸¤è€…åº¦æ•°ï¼ŒæŠŠé‚»å±…æ•°é‡å¤šçš„èµ‹ç»™x
                     //{
                        // int t = v;
                       //  v = u;
@@ -291,10 +291,10 @@ int Get_route_size(Graph& G, int& anchor_edge, vector<pair<int, int>>& hull_pair
                     //}
                     //vector<pair<int, int>> del;
 
-                    for (auto ite = G.common_neighbor[pair<int, int>(u, v)].begin(); ite != G.common_neighbor[pair<int, int>(u, v)].end(); ite++)   //½«°üº¬anchorµÄÈı½ÇĞÎµÄ±ß°´Ê÷½á¹¹·ÖÀà
+                    for (auto ite = G.common_neighbor[pair<int, int>(u, v)].begin(); ite != G.common_neighbor[pair<int, int>(u, v)].end(); ite++)   //å°†åŒ…å«anchorçš„ä¸‰è§’å½¢çš„è¾¹æŒ‰æ ‘ç»“æ„åˆ†ç±»
                     {
                         int w = *ite;
-                        //if (G.neighbor_hash[v].find(w) != G.neighbor_hash[v].end())   //ÕÒµ½Ò»¸öÈı½ÇĞÎ
+                        //if (G.neighbor_hash[v].find(w) != G.neighbor_hash[v].end())   //æ‰¾åˆ°ä¸€ä¸ªä¸‰è§’å½¢
                         {
                             int e_1 = G.edge[pair<int, int>(u, w)];
                             int e_2 = G.edge[pair<int, int>(v, w)];
@@ -302,11 +302,11 @@ int Get_route_size(Graph& G, int& anchor_edge, vector<pair<int, int>>& hull_pair
 
 
 
-                            if (hull_pair[e_1].first > hull_pair[e_2].first)  //e_1ÊÇtrussnessĞ¡µÄÄÇÌõ±ß
+                            if (hull_pair[e_1].first > hull_pair[e_2].first)  //e_1æ˜¯trussnesså°çš„é‚£æ¡è¾¹
                             {
                                 int temp = e_1;
                                 e_1 = e_2;
-                                e_2 = temp;       //½»»»Öµ
+                                e_2 = temp;       //äº¤æ¢å€¼
                             }
                             Edge e1, e2;
                             e1.id = e_1;
@@ -314,29 +314,29 @@ int Get_route_size(Graph& G, int& anchor_edge, vector<pair<int, int>>& hull_pair
                             e2.id = e_2;
                             e2.layer = hull_pair[e_2].second;
 
-                            if (hull_pair[e_1].first == hull_pair[e_2].first && hull_pair[e_1].first == hull_pair[e].first)      //ÈôÈı½ÇĞÎµÄÆäËûÁ½Ìõ±ßtrussnessºÍe±ßÒ»Ñù´ó  
+                            if (hull_pair[e_1].first == hull_pair[e_2].first && hull_pair[e_1].first == hull_pair[e].first)      //è‹¥ä¸‰è§’å½¢çš„å…¶ä»–ä¸¤æ¡è¾¹trussnesså’Œeè¾¹ä¸€æ ·å¤§  
                             {
-                                if (hull_pair[e_1].second > hull_pair[e].second && hull_pair[e_2].second > hull_pair[e].second)  //²¢ÇÒÕâÁ½Ìõ±ßÔÚanchor_edgeµÄÄÚ²ã
+                                if (hull_pair[e_1].second > hull_pair[e].second && hull_pair[e_2].second > hull_pair[e].second)  //å¹¶ä¸”è¿™ä¸¤æ¡è¾¹åœ¨anchor_edgeçš„å†…å±‚
                                 {
                                     if (visited[e_1] == false && ifexist[e_1] == false)
                                     {
                                         ifexist[e_1] = true;
-                                        classified_edges[K].push(e1);  //½«¸Ã±ß´æÈë¶ÔÓ¦¶ÓÁĞ
+                                        classified_edges[K].push(e1);  //å°†è¯¥è¾¹å­˜å…¥å¯¹åº”é˜Ÿåˆ—
                                     }
 
                                     if (visited[e_2] == false && ifexist[e_2] == false)
                                     {
                                         ifexist[e_2] = true;
-                                        classified_edges[K].push(e2);  //½«¸Ã±ß´æÈë¶ÔÓ¦¶ÓÁĞ
+                                        classified_edges[K].push(e2);  //å°†è¯¥è¾¹å­˜å…¥å¯¹åº”é˜Ÿåˆ—
                                     }
                                 }
 
-                                if (hull_pair[e_1].second == hull_pair[e].second && hull_pair[e_2].second > hull_pair[e].second && discard[e_1] == false)   //weak triangle µÄÇé¿ö
+                                if (hull_pair[e_1].second == hull_pair[e].second && hull_pair[e_2].second > hull_pair[e].second && discard[e_1] == false)   //weak triangle çš„æƒ…å†µ
                                 {
                                     if (visited[e_2] == false && ifexist[e_2] == false)
                                     {
                                         ifexist[e_2] = true;
-                                        classified_edges[K].push(e2);  //½«¸Ã±ß´æÈë¶ÔÓ¦¶ÓÁĞ
+                                        classified_edges[K].push(e2);  //å°†è¯¥è¾¹å­˜å…¥å¯¹åº”é˜Ÿåˆ—
                                     }
 
                                     if (visited[e_1] == false && ifexist[e_1] == false)
@@ -347,12 +347,12 @@ int Get_route_size(Graph& G, int& anchor_edge, vector<pair<int, int>>& hull_pair
 
                                 }
 
-                                if (hull_pair[e_2].second == hull_pair[e].second && hull_pair[e_1].second > hull_pair[e].second && discard[e_2] == false)   //weak triangle µÄÇé¿ö
+                                if (hull_pair[e_2].second == hull_pair[e].second && hull_pair[e_1].second > hull_pair[e].second && discard[e_2] == false)   //weak triangle çš„æƒ…å†µ
                                 {
                                     if (visited[e_1] == false && ifexist[e_1] == false)
                                     {
                                         ifexist[e_1] = true;
-                                        classified_edges[K].push(e1);  //½«¸Ã±ß´æÈë¶ÔÓ¦¶ÓÁĞ
+                                        classified_edges[K].push(e1);  //å°†è¯¥è¾¹å­˜å…¥å¯¹åº”é˜Ÿåˆ—
                                     }
                                     if (visited[e_2] == false && ifexist[e_2] == false)
                                     {
@@ -379,37 +379,37 @@ int Get_route_size(Graph& G, int& anchor_edge, vector<pair<int, int>>& hull_pair
                                 }
                             }
 
-                            if (hull_pair[e].first == hull_pair[e_1].first && hull_pair[e].first < hull_pair[e_2].first)                // ÈıÌõ±ßtrussness´óĞ¡ÊÇanchor_edge=e_1  e_2>e_1  e_2>e
+                            if (hull_pair[e].first == hull_pair[e_1].first && hull_pair[e].first < hull_pair[e_2].first)                // ä¸‰æ¡è¾¹trussnesså¤§å°æ˜¯anchor_edge=e_1  e_2>e_1  e_2>e
                             {
-                                if (hull_pair[e].second < hull_pair[e_1].second)    //²¢ÇÒÔÚanchoredgeµÄÄÚ²ã
+                                if (hull_pair[e].second < hull_pair[e_1].second)    //å¹¶ä¸”åœ¨anchoredgeçš„å†…å±‚
                                 {
                                     if (visited[e_1] == false && ifexist[e_1] == false)
                                     {
                                         ifexist[e_1] = true;
-                                        classified_edges[K].push(e1);  //½«¸Ã±ß´æÈë¶ÔÓ¦¶ÓÁĞ
+                                        classified_edges[K].push(e1);  //å°†è¯¥è¾¹å­˜å…¥å¯¹åº”é˜Ÿåˆ—
                                     }
 
                                 }
 
-                                if (hull_pair[e].second == hull_pair[e_1].second)    //²¢ÇÒÔÚanchoredgeµÄ±¾²ã
+                                if (hull_pair[e].second == hull_pair[e_1].second)    //å¹¶ä¸”åœ¨anchoredgeçš„æœ¬å±‚
                                 {
                                     if (visited[e_1] == false && ifexist[e_1] == false)
                                     {
                                         ifexist[e_1] = true;
-                                        classified_edges[K].push(e1);  //½«¸Ã±ß´æÈë¶ÔÓ¦¶ÓÁĞ
+                                        classified_edges[K].push(e1);  //å°†è¯¥è¾¹å­˜å…¥å¯¹åº”é˜Ÿåˆ—
                                     }
 
                                 }
                             }
 
 
-                        }       //ÕÒÈı½ÇĞÎ
+                        }       //æ‰¾ä¸‰è§’å½¢
 
                     }
 
 
                     visited[e] = true;
-                    // Q.erase(std::remove(Q.begin(), Q.end(), eid_maxsup), Q.end());    //´¦ÀíÍê¾Í´ÓQ¼¯ºÏÖĞÉ¾³ı
+                    // Q.erase(std::remove(Q.begin(), Q.end(), eid_maxsup), Q.end());    //å¤„ç†å®Œå°±ä»Qé›†åˆä¸­åˆ é™¤
 
                 }
                 //auto end_SLA = std::chrono::high_resolution_clock::now();
@@ -420,11 +420,11 @@ int Get_route_size(Graph& G, int& anchor_edge, vector<pair<int, int>>& hull_pair
 
             }
 
-            //else   //Èôsupport upper×î´óµÄ±ß¶¼²»Âú×ãÒªÇó£¬Ôò½«Q¼¯ºÏÖĞÆäËûµÄ±ßÉèÖÃÎª¶ªÆú
+            //else   //è‹¥support upperæœ€å¤§çš„è¾¹éƒ½ä¸æ»¡è¶³è¦æ±‚ï¼Œåˆ™å°†Qé›†åˆä¸­å…¶ä»–çš„è¾¹è®¾ç½®ä¸ºä¸¢å¼ƒ
             //{
 
-            //    discard[e] = true;   //²»Âú×ãsupportcheckµÄ±ß½«±»¶ªÆú
-            //    s[e] = -1;  //ÉèÖÃÎª¶ªÆú
+            //    discard[e] = true;   //ä¸æ»¡è¶³supportcheckçš„è¾¹å°†è¢«ä¸¢å¼ƒ
+            //    s[e] = -1;  //è®¾ç½®ä¸ºä¸¢å¼ƒ
             //    // cout << e << endl;
             //     //vector<bool> proccessed(G.m, false);
 
@@ -438,7 +438,7 @@ int Get_route_size(Graph& G, int& anchor_edge, vector<pair<int, int>>& hull_pair
 
 
 
-            //    //¸üĞÂÒòÎªdiscard±ß¶øÊÜµ½Ó°ÏìµÄsupport.
+            //    //æ›´æ–°å› ä¸ºdiscardè¾¹è€Œå—åˆ°å½±å“çš„support.
 
             //}
 
@@ -473,7 +473,7 @@ int Get_route_size(Graph& G, int& anchor_edge, vector<pair<int, int>>& hull_pair
     munmap(ifexist, size * sizeof(bool));
     ////delete[] ifexist;
 
-    //if (current_size < minmal_route_size) //Í³¼ÆÂ·¾¶µÄ³¤¶È
+    //if (current_size < minmal_route_size) //ç»Ÿè®¡è·¯å¾„çš„é•¿åº¦
     //    minmal_route_size = current_size;
 
     //if (current_size > maximal_route_size)
@@ -484,7 +484,7 @@ int Get_route_size(Graph& G, int& anchor_edge, vector<pair<int, int>>& hull_pair
     return res;
 }
 
-vector<pair<int, int>> get_hull_pair(Graph& G, int(*max))    //¼ÆËã£¨trussness£¬layer£©pair
+vector<pair<int, int>> get_hull_pair(Graph& G, int(*max))    //è®¡ç®—ï¼ˆtrussnessï¼Œlayerï¼‰pair
 {
     auto time = 0;
 
@@ -503,9 +503,9 @@ vector<pair<int, int>> get_hull_pair(Graph& G, int(*max))    //¼ÆËã£¨trussness£¬
 
 
         std::unordered_set<int> K_hull;
-        K_hull.insert(G.Truss_Table[k - 1].begin(), G.Truss_Table[k - 1].end());   //µÃµ½k-1 hull µÄËùÓĞ±ßµÄ±ß±êºÅ
+        K_hull.insert(G.Truss_Table[k - 1].begin(), G.Truss_Table[k - 1].end());   //å¾—åˆ°k-1 hull çš„æ‰€æœ‰è¾¹çš„è¾¹æ ‡å·
 
-        int layer = 1;      //¼ÇÂ¼²ãÊı
+        int layer = 1;      //è®°å½•å±‚æ•°
 
         while (K_hull.size() != 0)
         {
@@ -526,12 +526,12 @@ vector<pair<int, int>> get_hull_pair(Graph& G, int(*max))    //¼ÆËã£¨trussness£¬
                 }
             }
 
-            //µ÷ÕûÊÜÓ°ÏìµÄ±ßÖ§³Ö¶È
+            //è°ƒæ•´å—å½±å“çš„è¾¹æ”¯æŒåº¦
             while (Q.size() > 0)
             {
                 int a = Q.front();
                 K_hull.erase(a);
-                del[a] = true;    //¸Ã±ß±ê¼ÇÎªÉ¾³ı
+                del[a] = true;    //è¯¥è¾¹æ ‡è®°ä¸ºåˆ é™¤
 
                 Q.pop();
 
@@ -547,16 +547,16 @@ vector<pair<int, int>> get_hull_pair(Graph& G, int(*max))    //¼ÆËã£¨trussness£¬
                    //  y = t;
                  //}
 
-                for (auto iter = G.common_neighbor[pair<int, int>(x, y)].begin(); iter != G.common_neighbor[pair<int, int>(x, y)].end(); iter++)   //¼ÆËãÊÜµ½Ó°ÏìµÄsup
+                for (auto iter = G.common_neighbor[pair<int, int>(x, y)].begin(); iter != G.common_neighbor[pair<int, int>(x, y)].end(); iter++)   //è®¡ç®—å—åˆ°å½±å“çš„sup
                 {
                     int w = *iter;
                     int e1 = G.edge[pair<int, int>(x, w)];
-                    if (del[e1] == true) continue;         //ÈôÒ»Ìõ±ßÒÑ±»É¾³ı£¬ÔòÊ²Ã´¶¼²»×ö
+                    if (del[e1] == true) continue;         //è‹¥ä¸€æ¡è¾¹å·²è¢«åˆ é™¤ï¼Œåˆ™ä»€ä¹ˆéƒ½ä¸åš
 
-                    //if (neighbor_hash[y].find(*iter) != neighbor_hash[y].end())    //ÕÒµ½¹«¹²µã£¬Ò»¸öÈı½ÇĞÎ
+                    //if (neighbor_hash[y].find(*iter) != neighbor_hash[y].end())    //æ‰¾åˆ°å…¬å…±ç‚¹ï¼Œä¸€ä¸ªä¸‰è§’å½¢
                     {
                         int e2 = G.edge[pair<int, int>(y, w)];
-                        if (del[e2] == true) continue;      //±ß±»É¾³ı£¬Ôò±íÊ¾¸ÃÈı½ÇĞÎÒÑ¾­²»´æÔÚ
+                        if (del[e2] == true) continue;      //è¾¹è¢«åˆ é™¤ï¼Œåˆ™è¡¨ç¤ºè¯¥ä¸‰è§’å½¢å·²ç»ä¸å­˜åœ¨
                         sup[e2]--;
 
                         //e = G.edge[pair<int, int>(x, w)];
@@ -587,14 +587,14 @@ vector<pair<int, int>> get_hull_pair(Graph& G, int(*max))    //¼ÆËã£¨trussness£¬
     return res;
 }
 
-vector<int> compute_anchor_followers(Graph& G, vector<int> anchoreid, vector<int>& trussness)  //¼ÆËãanchorsetµÄËùÓĞfollowers.
+vector<int> compute_anchor_followers(Graph& G, vector<int> anchoreid, vector<int>& trussness)  //è®¡ç®—anchorsetçš„æ‰€æœ‰followers.
 {
     vector<int> res;
     for (int i = 0; i < trussness.size(); i++)
     {
         if (trussness[i] != G.trussness[i] && std::find(anchoreid.begin(), anchoreid.end(), i) == anchoreid.end())
         {
-            for (int j = 0; j < trussness[i] - G.trussness[i]; j++)  //ÈôÓĞ±ßtrussnessÎªÌáÉıÎª2ÒÔÉÏ£¬Ôò´æ¶ÔÓ¦µÄ¸öÊı
+            for (int j = 0; j < trussness[i] - G.trussness[i]; j++)  //è‹¥æœ‰è¾¹trussnessä¸ºæå‡ä¸º2ä»¥ä¸Šï¼Œåˆ™å­˜å¯¹åº”çš„ä¸ªæ•°
             {
                 res.push_back(i);
                 // cout << "follower " << i << "trussness " << G.trussness[i] << endl;
@@ -606,7 +606,7 @@ vector<int> compute_anchor_followers(Graph& G, vector<int> anchoreid, vector<int
     return res;
 }
 
-void tup(Graph G)//ÕÒb¸öroute size×î´óµÄ±ßanchor
+void tup(Graph G)//æ‰¾bä¸ªroute sizeæœ€å¤§çš„è¾¹anchor
 {
     int maxlayer = 0;
     vector<pair<int, int>> hp = get_hull_pair(G, &maxlayer);
@@ -634,17 +634,17 @@ void tup(Graph G)//ÕÒb¸öroute size×î´óµÄ±ßanchor
         {
 
             vector<int> anchorset;
-            while (anchorset.size() < b)  //Ëæ»ú´Ópath×î´óµÄ±ßÑ¡bÌõ
+            while (anchorset.size() < b)  //éšæœºä»pathæœ€å¤§çš„è¾¹é€‰bæ¡
             {
-                std::random_device rd; // »ñÈ¡Ëæ»úÊıÖÖ×Ó
-                std::mt19937 gen(rd()); // Ê¹ÓÃÃ·É­Ğı×ªËã·¨
-                std::uniform_int_distribution<> distrib(0, G.m * 0.2); // Ö¸¶¨¾ùÔÈ·Ö²¼·¶Î§
+                std::random_device rd; // è·å–éšæœºæ•°ç§å­
+                std::mt19937 gen(rd()); // ä½¿ç”¨æ¢…æ£®æ—‹è½¬ç®—æ³•
+                std::uniform_int_distribution<> distrib(0, G.m * 0.2); // æŒ‡å®šå‡åŒ€åˆ†å¸ƒèŒƒå›´
 
                 if (find(anchorset.begin(), anchorset.end(), rt[distrib(gen)].edge_id) == anchorset.end())
                     anchorset.push_back(rt[distrib(gen)].edge_id);
             }
 
-            //¼ÆËãfollowers
+            //è®¡ç®—followers
             vector<int> as;
             vector<int>trussness_before = G.computetruss(anchorset);
             vector<int> followers_after = compute_anchor_followers(G, anchorset, trussness_before);
