@@ -1,10 +1,10 @@
 # AnchorEdge
 
+This folder contains all codes of paper "Enhance Stability of Network by Edge Anchor".
+
 ## Running Format
 
-The source code of our paper are in the folder "src".
-
-The source code of each algorithm has five parameters, corresponding to the algorithm name (e.g., **VFree**), the dataset name (e.g., **D5**), the two size constraints $\tau_U$ and $\tau_V$ (e.g., **5 4**), and the frequency constraint &lambda; (e.g., **3**).
+We list the algorithms in the paper, four random algorithms (Exact, Rand, Sup, Tur) and three greedy algorithms (Base, Base+, GAS).
 
 * Running example for Algorithms **VFree** and **VFree-**
 
@@ -28,9 +28,10 @@ The source code of each algorithm has five parameters, corresponding to the algo
 
 To save space, we only provide four datasets in the folder "dataset" for testing, other datasets can be found on https://snap.stanford.edu/data/index.html
 
-Folder "datasets/subgraphs" contains 20 subgraphs that extracted from facebook and brightkites.
+Folder "datasets/subgraphs" contains 20 subgraphs that are extracted from facebook and brightkites.
 
-| Datasets | \|V\| | \|E\| |   Link             |
+
+| Datasets | \|V\| | \|E\| |   Link |
 |----------|----|----|----|
 | College | 1,899 | 13,838 | https://snap.stanford.edu/data/CollegeMsg.html |
 | Facebook | 4,039 | 88,234 | https://snap.stanford.edu/data/ego-Facebook.html  |
