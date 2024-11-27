@@ -16,7 +16,7 @@ int main()
 {
     Graph G;
     char dataset[100];
-    char* a = "/home/qhb/dataset/sub6_facebook.txt";
+    const char* a = "/home/qhb/dataset/sub6_facebook.txt";
 
     strcpy(dataset, a);
     //cout<<strlen(dataset)<<endl;
