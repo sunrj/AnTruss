@@ -23,23 +23,23 @@ using namespace std;
 
 struct TreeNode
 {
-    int id;        //Ê÷µÄid
-    int K;         //Ê÷½ÚµãÄÚ±ßµÄtrusssnessÖµ
-    int P;         //Ê÷µÄ¸¸½Úµã
-    vector<int> C;         //Ê÷µÄÒ¶×Ó½Úµã
-    vector<int> E; //Ê÷°üº¬µÄ±ß
-    vector<pair<int, int>> edges;  //´æ´¢¾ßÌåµÄ±ß
+    int id;        //æ ‘çš„id
+    int K;         //æ ‘èŠ‚ç‚¹å†…è¾¹çš„trusssnesså€¼
+    int P;         //æ ‘çš„çˆ¶èŠ‚ç‚¹
+    vector<int> C;         //æ ‘çš„å¶å­èŠ‚ç‚¹
+    vector<int> E; //æ ‘åŒ…å«çš„è¾¹
+    vector<pair<int, int>> edges;  //å­˜å‚¨å…·ä½“çš„è¾¹
 };
 
 vector<int> findCommonNeighbors(const std::vector<std::unordered_set<int>*>& neighbor, int node1, int node2) {
     vector<int> commonNeighbors;
 
-    // ¼ì²é½Úµã1ºÍ½Úµã2ÊÇ·ñÓĞĞ§
+    // æ£€æŸ¥èŠ‚ç‚¹1å’ŒèŠ‚ç‚¹2æ˜¯å¦æœ‰æ•ˆ
     if (node1 >= 0 && node1 < neighbor.size() && node2 >= 0 && node2 < neighbor.size()) {
         const std::unordered_set<int>* neighbors1 = neighbor[node1];
         const std::unordered_set<int>* neighbors2 = neighbor[node2];
 
-        // ÕÒµ½Á½¸ö½ÚµãµÄ¹«¹²ÁÚ¾Ó
+        // æ‰¾åˆ°ä¸¤ä¸ªèŠ‚ç‚¹çš„å…¬å…±é‚»å±…
         for (int neighbor : *neighbors1) {
             if ((*neighbors2).find(neighbor) != (*neighbors2).end()) {
                 commonNeighbors.push_back(neighbor);
@@ -48,17 +48,17 @@ vector<int> findCommonNeighbors(const std::vector<std::unordered_set<int>*>& nei
     }
 
     return commonNeighbors;
-}   //ÕÒ¹şÏ£±íÖĞÁ½¸öµãµÄ¹«¸æÁÚ¾Ó
+}   //æ‰¾å“ˆå¸Œè¡¨ä¸­ä¸¤ä¸ªç‚¹çš„å…¬å‘Šé‚»å±…
 
 vector<int> findCommonNeighbors(const std::vector<std::unordered_set<int>>& neighbor, int node1, int node2) {
     vector<int> commonNeighbors;
 
-    // ¼ì²é½Úµã1ºÍ½Úµã2ÊÇ·ñÓĞĞ§
+    // æ£€æŸ¥èŠ‚ç‚¹1å’ŒèŠ‚ç‚¹2æ˜¯å¦æœ‰æ•ˆ
     if (node1 >= 0 && node1 < neighbor.size() && node2 >= 0 && node2 < neighbor.size()) {
         const std::unordered_set<int> neighbors1 = neighbor[node1];
         const std::unordered_set<int> neighbors2 = neighbor[node2];
 
-        // ÕÒµ½Á½¸ö½ÚµãµÄ¹«¹²ÁÚ¾Ó
+        // æ‰¾åˆ°ä¸¤ä¸ªèŠ‚ç‚¹çš„å…¬å…±é‚»å±…
         for (int neighbor : neighbors1) {
             if ((neighbors2).find(neighbor) != (neighbors2).end()) {
                 commonNeighbors.push_back(neighbor);
@@ -67,14 +67,14 @@ vector<int> findCommonNeighbors(const std::vector<std::unordered_set<int>>& neig
     }
 
     return commonNeighbors;
-}   //ÕÒ¹şÏ£±íÖĞÁ½¸öµãµÄ¹«¸æÁÚ¾Ó  // ÖØÔØ
+}   //æ‰¾å“ˆå¸Œè¡¨ä¸­ä¸¤ä¸ªç‚¹çš„å…¬å‘Šé‚»å±…  // é‡è½½
 
-void tree(Graph& G, vector<pair<int, int>>& edge, int rootid, std::unordered_map<int, TreeNode>* Tree) //¼ÆËãÈı½ÇĞÎÁªÍ¨µÄ×ÓÍ¼
+void tree(Graph& G, vector<pair<int, int>>& edge, int rootid, std::unordered_map<int, TreeNode>* Tree) //è®¡ç®—ä¸‰è§’å½¢è”é€šçš„å­å›¾
 {
     //cout << a << endl;
     //a++;
     //vector<TreeNode> res;
-    if (edge.size() == 0)//ÈôÍ¼Îª¿Õ£¬ÔòÖ±½Ó·µ»Ø¿ÕÊ÷
+    if (edge.size() == 0)//è‹¥å›¾ä¸ºç©ºï¼Œåˆ™ç›´æ¥è¿”å›ç©ºæ ‘
     {
         return;
     }
@@ -82,8 +82,8 @@ void tree(Graph& G, vector<pair<int, int>>& edge, int rootid, std::unordered_map
     //p = ((*Tree).back());
     //auto aaaa = std::chrono::high_resolution_clock::now();
     //vector<int> del;
-    int K_min = G.trussness[G.edge.find(edge[0])->second];  //³õÊ¼»¯×îĞ¡Öµ
-    for (int i = 0; i < edge.size(); i++)  //¼ÆËãtrussnessµÄ×îĞ¡Öµ
+    int K_min = G.trussness[G.edge.find(edge[0])->second];  //åˆå§‹åŒ–æœ€å°å€¼
+    for (int i = 0; i < edge.size(); i++)  //è®¡ç®—trussnessçš„æœ€å°å€¼
     {
         //int eid = G.edge.find(edge[i])->second;
         int trussness = G.trussness[G.edge.find(edge[i])->second];
@@ -95,7 +95,7 @@ void tree(Graph& G, vector<pair<int, int>>& edge, int rootid, std::unordered_map
         }
 
     }
-    if (K_min == INF)  //anchor edge²»¼ÓÈëÈÎºÎÊ÷½Úµã
+    if (K_min == INF)  //anchor edgeä¸åŠ å…¥ä»»ä½•æ ‘èŠ‚ç‚¹
     {
         return;
     }
@@ -107,7 +107,7 @@ void tree(Graph& G, vector<pair<int, int>>& edge, int rootid, std::unordered_map
 
     for (int i = 0; i < edge.size(); i++)
     {
-        if (neighbor[edge[i].first] == nullptr)  //ÈôÖ¸ÕëÖ¸Ïò¿Õ£¬Ôò±íÊ¾¸Ã´¦ÁÚ¾Ó½ÚµãÃ»ÓĞ³õÊ¼»¯£¬Ôò³õÊ¼»¯ºóÔÙÌí¼Ó
+        if (neighbor[edge[i].first] == nullptr)  //è‹¥æŒ‡é’ˆæŒ‡å‘ç©ºï¼Œåˆ™è¡¨ç¤ºè¯¥å¤„é‚»å±…èŠ‚ç‚¹æ²¡æœ‰åˆå§‹åŒ–ï¼Œåˆ™åˆå§‹åŒ–åå†æ·»åŠ 
         {
             neighbor[edge[i].first] = new std::unordered_set<int>();
             neighbor[edge[i].first]->insert(edge[i].second);
@@ -117,7 +117,7 @@ void tree(Graph& G, vector<pair<int, int>>& edge, int rootid, std::unordered_map
             neighbor[edge[i].first]->insert(edge[i].second);
         }
 
-        if (neighbor[edge[i].second] == nullptr)  //Í¬Àí
+        if (neighbor[edge[i].second] == nullptr)  //åŒç†
         {
             neighbor[edge[i].second] = new std::unordered_set<int>();
             neighbor[edge[i].second]->insert(edge[i].first);
@@ -131,17 +131,17 @@ void tree(Graph& G, vector<pair<int, int>>& edge, int rootid, std::unordered_map
 
 
     vector<int> visited(G.m + 1);
-    queue<pair<int, int>> Q;   //¹ã¶ÈÓÅÏÈ±éÀú¶ÓÁĞ
-    for (int i = 0; i < edge.size(); i++)  //¶Ô×ÓÍ¼½øĞĞ¹ã¶ÈÓÅÏÈËÑË÷
+    queue<pair<int, int>> Q;   //å¹¿åº¦ä¼˜å…ˆéå†é˜Ÿåˆ—
+    for (int i = 0; i < edge.size(); i++)  //å¯¹å­å›¾è¿›è¡Œå¹¿åº¦ä¼˜å…ˆæœç´¢
     {
 
 
         int eid = G.edge.find(edge[i])->second;
-        if (visited[eid] == 0)//ÈôÕâÌõ±ßÎ´·ÃÎÊ¹ı   Ôò´Ó¸Ã±ß¿ªÊ¼ÊÇ¸öĞÂµÄÈı½ÇĞÎÁªÍ¨µÄ×ÓÍ¼
+        if (visited[eid] == 0)//è‹¥è¿™æ¡è¾¹æœªè®¿é—®è¿‡   åˆ™ä»è¯¥è¾¹å¼€å§‹æ˜¯ä¸ªæ–°çš„ä¸‰è§’å½¢è”é€šçš„å­å›¾
         {
             TreeNode node;
             node.K = K_min;
-            neighbor[edge[i].first]->erase(edge[i].second);   //·ÃÎÊ¹ı¾ÍÉ¾³ıÁÚ¾ÓĞÅÏ¢£¬±ÜÃâ´óÁ¿µÄÎŞĞ§ËÑË÷
+            neighbor[edge[i].first]->erase(edge[i].second);   //è®¿é—®è¿‡å°±åˆ é™¤é‚»å±…ä¿¡æ¯ï¼Œé¿å…å¤§é‡çš„æ— æ•ˆæœç´¢
             neighbor[edge[i].second]->erase(edge[i].first);
             if (rootid == -1)
             {
@@ -154,8 +154,8 @@ void tree(Graph& G, vector<pair<int, int>>& edge, int rootid, std::unordered_map
 
 
             int id = -1;
-            vector<pair<int, int>> edge_next_iteration;   //´æ´¢ÏÂÒ»ÂÖµİ¹éµÄ±ß
-            visited[eid] = 1;  //ÉèÖÃ³ÉÒÑ·ÃÎÊ
+            vector<pair<int, int>> edge_next_iteration;   //å­˜å‚¨ä¸‹ä¸€è½®é€’å½’çš„è¾¹
+            visited[eid] = 1;  //è®¾ç½®æˆå·²è®¿é—®
             if (G.trussness[eid] == K_min)
             {
                 node.E.push_back(eid);
@@ -171,7 +171,7 @@ void tree(Graph& G, vector<pair<int, int>>& edge, int rootid, std::unordered_map
             }
 
 
-            Q.push(edge[i]);  //Èë¶Ó£¬´Ó¸ÃÔªËØ½øĞĞ·ÃÎÊ
+            Q.push(edge[i]);  //å…¥é˜Ÿï¼Œä»è¯¥å…ƒç´ è¿›è¡Œè®¿é—®
             while (Q.size() != 0)
             {
                 pair<int, int> e = Q.front();
@@ -181,19 +181,19 @@ void tree(Graph& G, vector<pair<int, int>>& edge, int rootid, std::unordered_map
                 int y = e.second;
 
 
-                neighbor[y]->erase(x);   //·ÃÎÊ¹ı¾ÍÉ¾³ıÁÚ¾ÓĞÅÏ¢£¬±ÜÃâ´óÁ¿µÄÎŞĞ§ËÑË÷
+                neighbor[y]->erase(x);   //è®¿é—®è¿‡å°±åˆ é™¤é‚»å±…ä¿¡æ¯ï¼Œé¿å…å¤§é‡çš„æ— æ•ˆæœç´¢
                 neighbor[x]->erase(y);
 
 
                 vector<int> commonneighbor = findCommonNeighbors(neighbor, x, y);
 
 
-                for (int j = 0; j < commonneighbor.size(); j++)  //Öğ¸ö´¦ÀíÈı½ÇĞÎ
+                for (int j = 0; j < commonneighbor.size(); j++)  //é€ä¸ªå¤„ç†ä¸‰è§’å½¢
                 {
                     int w = commonneighbor[j];
                     int e_1 = G.edge[pair<int, int>(x, w)];
                     int e_2 = G.edge[pair<int, int>(y, w)];
-                    if (visited[e_1] == 0)//Èô¸Ã±ßÎ´±»·ÃÎÊ
+                    if (visited[e_1] == 0)//è‹¥è¯¥è¾¹æœªè¢«è®¿é—®
                     {
 
                         Q.push(pair<int, int>(x, w));
@@ -217,17 +217,17 @@ void tree(Graph& G, vector<pair<int, int>>& edge, int rootid, std::unordered_map
                         }
 
 
-                        visited[e_1] = 1;  //ÉèÖÃ³ÉÒÑ·ÃÎÊ
+                        visited[e_1] = 1;  //è®¾ç½®æˆå·²è®¿é—®
                     }
 
-                    if (visited[e_2] == 0)//Èô¸Ã±ßÎ´±»·ÃÎÊ
+                    if (visited[e_2] == 0)//è‹¥è¯¥è¾¹æœªè¢«è®¿é—®
                     {
                         Q.push(pair<int, int>(y, w));
                         if (G.trussness[e_2] == K_min)
                         {
                             node.E.push_back(e_2);
                             node.edges.push_back(pair<int, int>(y, w));
-                            if (id == -1)  //id=-1±íÊ¾Ã»ÓĞ±»¸³Öµ¹ı
+                            if (id == -1)  //id=-1è¡¨ç¤ºæ²¡æœ‰è¢«èµ‹å€¼è¿‡
                             {
                                 id = e_2;
                             }
@@ -244,17 +244,17 @@ void tree(Graph& G, vector<pair<int, int>>& edge, int rootid, std::unordered_map
                         }
 
 
-                        visited[e_2] = 1;  //ÉèÖÃ³ÉÒÑ·ÃÎÊ
+                        visited[e_2] = 1;  //è®¾ç½®æˆå·²è®¿é—®
                     }
                 }
 
-            }     //¹ã¶ÈËÑË÷ÍêÒ»ÂÖ
+            }     //å¹¿åº¦æœç´¢å®Œä¸€è½®
 
-            //Õë¶ÔÕâ¸öÈı½ÇĞÎÁªÍ¨µÄcomponent½øĞĞÏÂÒ»ÂÖµİ¹é
+            //é’ˆå¯¹è¿™ä¸ªä¸‰è§’å½¢è”é€šçš„componentè¿›è¡Œä¸‹ä¸€è½®é€’å½’
             if (node.edges.size() > 0)
             {
                 node.id = id;
-                if (rootid != -1)  (*Tree).find(rootid)->second.C.push_back(node.id);  //¸Ã½Úµã²»ÊÇ¸ù½Úµã
+                if (rootid != -1)  (*Tree).find(rootid)->second.C.push_back(node.id);  //è¯¥èŠ‚ç‚¹ä¸æ˜¯æ ¹èŠ‚ç‚¹
                 (*Tree).insert(make_pair(node.id, node));
                 if (edge_next_iteration.size() > 0)
                     tree(G, edge_next_iteration, node.id, Tree);
@@ -268,24 +268,24 @@ void tree(Graph& G, vector<pair<int, int>>& edge, int rootid, std::unordered_map
     }
 
 
-    //ÊÍ·ÅÄÚ´æ
+    //é‡Šæ”¾å†…å­˜
     for (int i = 0; i < neighbor.size(); ++i) {
         delete neighbor[i];
     }
     //return res;
 }
 
-vector<pair<int, int>> get_hull_pair(Graph& G, int(*max))    //·µ»ØÍ¼ÖĞËùÓĞ±ßµÄhull_pair
+vector<pair<int, int>> get_hull_pair(Graph& G, int(*max))    //è¿”å›å›¾ä¸­æ‰€æœ‰è¾¹çš„hull_pair
 {
     auto time = 0;
 
-    vector<pair<int, int>> res(G.m);                 //´æ´¢½á¹û¼¯
+    vector<pair<int, int>> res(G.m);                 //å­˜å‚¨ç»“æœé›†
 
-    vector<pair<int, int>> edges = G.edge2;     //¸´ÖÆ±ß
+    vector<pair<int, int>> edges = G.edge2;     //å¤åˆ¶è¾¹
 
     vector<int> sup = G.sup;
 
-    vector<bool> del(G.m, false);    //±êÃ÷¸Ã±ßÊÇ·ñ±»É¾³ı
+    vector<bool> del(G.m, false);    //æ ‡æ˜è¯¥è¾¹æ˜¯å¦è¢«åˆ é™¤
 
     //for (int k = 3; k <= G.maxTrussness + 1; k++)
     for (int k = 3; k <= G.Truss_Table.size(); k++)
@@ -294,9 +294,9 @@ vector<pair<int, int>> get_hull_pair(Graph& G, int(*max))    //·µ»ØÍ¼ÖĞËùÓĞ±ßµÄh
 
 
         std::unordered_set<int> K_hull;
-        K_hull.insert(G.Truss_Table[k - 1].begin(), G.Truss_Table[k - 1].end());   //µÃµ½k-1 hull µÄËùÓĞ±ßµÄ±ß±êºÅ
+        K_hull.insert(G.Truss_Table[k - 1].begin(), G.Truss_Table[k - 1].end());   //å¾—åˆ°k-1 hull çš„æ‰€æœ‰è¾¹çš„è¾¹æ ‡å·
 
-        int layer = 1;      //¼ÇÂ¼²ãÊı
+        int layer = 1;      //è®°å½•å±‚æ•°
 
         while (K_hull.size() != 0)
         {
@@ -317,12 +317,12 @@ vector<pair<int, int>> get_hull_pair(Graph& G, int(*max))    //·µ»ØÍ¼ÖĞËùÓĞ±ßµÄh
                 }
             }
 
-            //µ÷ÕûÊÜÓ°ÏìµÄ±ßÖ§³Ö¶È
+            //è°ƒæ•´å—å½±å“çš„è¾¹æ”¯æŒåº¦
             while (Q.size() > 0)
             {
                 int a = Q.front();
                 K_hull.erase(a);
-                del[a] = true;    //¸Ã±ß±ê¼ÇÎªÉ¾³ı
+                del[a] = true;    //è¯¥è¾¹æ ‡è®°ä¸ºåˆ é™¤
 
                 Q.pop();
 
@@ -338,16 +338,16 @@ vector<pair<int, int>> get_hull_pair(Graph& G, int(*max))    //·µ»ØÍ¼ÖĞËùÓĞ±ßµÄh
                    //  y = t;
                  //}
 
-                for (auto iter = G.common_neighbor[pair<int, int>(x, y)].begin(); iter != G.common_neighbor[pair<int, int>(x, y)].end(); iter++)   //¼ÆËãÊÜµ½Ó°ÏìµÄsup
+                for (auto iter = G.common_neighbor[pair<int, int>(x, y)].begin(); iter != G.common_neighbor[pair<int, int>(x, y)].end(); iter++)   //è®¡ç®—å—åˆ°å½±å“çš„sup
                 {
                     int w = *iter;
                     int e1 = G.edge[pair<int, int>(x, w)];
-                    if (del[e1] == true) continue;         //ÈôÒ»Ìõ±ßÒÑ±»É¾³ı£¬ÔòÊ²Ã´¶¼²»×ö
+                    if (del[e1] == true) continue;         //è‹¥ä¸€æ¡è¾¹å·²è¢«åˆ é™¤ï¼Œåˆ™ä»€ä¹ˆéƒ½ä¸åš
 
-                    //if (neighbor_hash[y].find(*iter) != neighbor_hash[y].end())    //ÕÒµ½¹«¹²µã£¬Ò»¸öÈı½ÇĞÎ
+                    //if (neighbor_hash[y].find(*iter) != neighbor_hash[y].end())    //æ‰¾åˆ°å…¬å…±ç‚¹ï¼Œä¸€ä¸ªä¸‰è§’å½¢
                     {
                         int e2 = G.edge[pair<int, int>(y, w)];
-                        if (del[e2] == true) continue;      //±ß±»É¾³ı£¬Ôò±íÊ¾¸ÃÈı½ÇĞÎÒÑ¾­²»´æÔÚ
+                        if (del[e2] == true) continue;      //è¾¹è¢«åˆ é™¤ï¼Œåˆ™è¡¨ç¤ºè¯¥ä¸‰è§’å½¢å·²ç»ä¸å­˜åœ¨
                         sup[e2]--;
 
                         //e = G.edge[pair<int, int>(x, w)];
@@ -378,7 +378,7 @@ vector<pair<int, int>> get_hull_pair(Graph& G, int(*max))    //·µ»ØÍ¼ÖĞËùÓĞ±ßµÄh
     return res;
 }
 
-struct edge_with_upperbound   //´øÓĞupper boundĞÅÏ¢µÄ±ß,ÓÃÓÚÅÅĞò
+struct edge_with_upperbound   //å¸¦æœ‰upper boundä¿¡æ¯çš„è¾¹,ç”¨äºæ’åº
 {
     int eid;
     int upper_bound;
@@ -393,11 +393,11 @@ bool cmp(edge_with_upperbound x, edge_with_upperbound y) {
 
 }
 
-vector<int> Get_treenode_containing_e(std::unordered_map<int, TreeNode>& Tree, Graph& G)  // »ñÈ¡Ã¿Ìõ±ßËùÔÚµÄtreenode id                              //»ñµÃÊı¾İ½á¹¹:°üº¬±ßeµÄÊ÷id
+vector<int> Get_treenode_containing_e(std::unordered_map<int, TreeNode>& Tree, Graph& G)  // è·å–æ¯æ¡è¾¹æ‰€åœ¨çš„treenode id                              //è·å¾—æ•°æ®ç»“æ„:åŒ…å«è¾¹eçš„æ ‘id
 {
     //auto aaaa = std::chrono::high_resolution_clock::now();
     //cout << "fffkcu" << endl;
-    vector<int> res(G.m + 1);   //³õÊ¼»¯Ò»¸ö´óĞ¡ÎªÍ¼µÄ±ßÊıÁ¿µÄres¼¯ºÏ
+    vector<int> res(G.m + 1);   //åˆå§‹åŒ–ä¸€ä¸ªå¤§å°ä¸ºå›¾çš„è¾¹æ•°é‡çš„resé›†åˆ
     for (const auto& pair : Tree)
     {
         for (int j = 0; j < pair.second.E.size(); j++)
@@ -416,7 +416,7 @@ vector<int> Get_treenode_containing_e(std::unordered_map<int, TreeNode>& Tree, G
 vector<pair<vector<int>, vector<int>>> GET_SLA_PLA(vector<int> node_containing_e, Graph& G)
 {
     //auto aaaa = std::chrono::high_resolution_clock::now();
-    vector<pair<vector<int>, vector<int>>> res(G.m);    //´æ´¢½á¹ûµÄvector
+    vector<pair<vector<int>, vector<int>>> res(G.m);    //å­˜å‚¨ç»“æœçš„vector
 
     //vector<std::unordered_set<int>> neig = G.neighbor_hash;
     for (int i = 0; i < G.m; i++)
@@ -426,7 +426,7 @@ vector<pair<vector<int>, vector<int>>> GET_SLA_PLA(vector<int> node_containing_e
         int x = G.edge2[i].first;
         int y = G.edge2[i].second;
 
-        //if (G.neighbor[x].size() > G.neighbor[y].size())   //±È½ÏÁ½Õß¶ÈÊı£¬°ÑÁÚ¾ÓÊıÁ¿¶àµÄ¸³¸øx
+        //if (G.neighbor[x].size() > G.neighbor[y].size())   //æ¯”è¾ƒä¸¤è€…åº¦æ•°ï¼ŒæŠŠé‚»å±…æ•°é‡å¤šçš„èµ‹ç»™x
        // {
           //  int t = x;
           //  x = y;
@@ -435,7 +435,7 @@ vector<pair<vector<int>, vector<int>>> GET_SLA_PLA(vector<int> node_containing_e
         for (auto iter = G.common_neighbor[G.edge2[i]].begin(); iter != G.common_neighbor[G.edge2[i]].end(); iter++)
         {
             int w = *iter;
-            //if (G.neighbor_hash[y].find(w) != G.neighbor_hash[y].end())  //ÕÒµ½Èı½ÇĞÎ
+            //if (G.neighbor_hash[y].find(w) != G.neighbor_hash[y].end())  //æ‰¾åˆ°ä¸‰è§’å½¢
             {
                 int eid_1 = G.edge[pair<int, int>(x, w)];
                 int eid_2 = G.edge[pair<int, int>(y, w)];
@@ -468,11 +468,11 @@ vector<pair<vector<int>, vector<int>>> GET_SLA_PLA(vector<int> node_containing_e
                     }
 
                 }
-                if (G.trussness[eid_1] >= G.trussness[i] && G.trussness[eid_2] < G.trussness[i] && find(res[i].second.begin(), res[i].second.end(), node_containing_e[eid_2]) == res[i].second.end())  //trussnessÒ»´óÒ»Ğ¡
+                if (G.trussness[eid_1] >= G.trussness[i] && G.trussness[eid_2] < G.trussness[i] && find(res[i].second.begin(), res[i].second.end(), node_containing_e[eid_2]) == res[i].second.end())  //trussnessä¸€å¤§ä¸€å°
                 {
                     res[i].second.push_back(node_containing_e[eid_2]);
                 }
-                if (G.trussness[eid_2] >= G.trussness[i] && G.trussness[eid_1] < G.trussness[i] && find(res[i].second.begin(), res[i].second.end(), node_containing_e[eid_1]) == res[i].second.end())  //trussnessÒ»´óÒ»Ğ¡
+                if (G.trussness[eid_2] >= G.trussness[i] && G.trussness[eid_1] < G.trussness[i] && find(res[i].second.begin(), res[i].second.end(), node_containing_e[eid_1]) == res[i].second.end())  //trussnessä¸€å¤§ä¸€å°
                 {
                     res[i].second.push_back(node_containing_e[eid_1]);
                 }
@@ -485,7 +485,7 @@ vector<pair<vector<int>, vector<int>>> GET_SLA_PLA(vector<int> node_containing_e
     return res;
 }
 
-vector<edge_with_upperbound> get_follower_upper_bound(Graph& G, std::unordered_map<int, TreeNode>* Tree, vector<pair<vector<int>, vector<int>>>& SLA_PLA, vector<std::unordered_map<int, vector<int>>>& collected_followers, vector<std::unordered_set<int>>& reuseable_node, vector<bool>& ifcomputed)   //»ñÈ¡Ò»Ìõ±ßµÄfollowersÊıÁ¿µÄÉÏ½çÖµ
+vector<edge_with_upperbound> get_follower_upper_bound(Graph& G, std::unordered_map<int, TreeNode>* Tree, vector<pair<vector<int>, vector<int>>>& SLA_PLA, vector<std::unordered_map<int, vector<int>>>& collected_followers, vector<std::unordered_set<int>>& reuseable_node, vector<bool>& ifcomputed)   //è·å–ä¸€æ¡è¾¹çš„followersæ•°é‡çš„ä¸Šç•Œå€¼
 {
     vector<edge_with_upperbound> edges(G.m);
 
@@ -497,7 +497,7 @@ vector<edge_with_upperbound> get_follower_upper_bound(Graph& G, std::unordered_m
         for (int j = 0; j < SLA_PLA[i].first.size(); j++)
         {
             //auto aaaa = std::chrono::high_resolution_clock::now();
-            if (reuseable_node[i].find(SLA_PLA[i].first[j]) != reuseable_node[i].end() && ifcomputed[i] == true)   //Èô·¢ÏÖÄ³¸ö½ÚµãµÄfollower¿ÉÒÔreuse£¬Ôò½«¾ßÌåµÄfollowerÊıÁ¿´úÌæupper bound£¬¸ü¾«È·,²¢ÇÒ¸Ã±ßµÄfollowers±»¼ÆËã¹ıÁË
+            if (reuseable_node[i].find(SLA_PLA[i].first[j]) != reuseable_node[i].end() && ifcomputed[i] == true)   //è‹¥å‘ç°æŸä¸ªèŠ‚ç‚¹çš„followerå¯ä»¥reuseï¼Œåˆ™å°†å…·ä½“çš„followeræ•°é‡ä»£æ›¿upper boundï¼Œæ›´ç²¾ç¡®,å¹¶ä¸”è¯¥è¾¹çš„followersè¢«è®¡ç®—è¿‡äº†
             {
                 if (collected_followers[i].find(SLA_PLA[i].first[j]) != collected_followers[i].end())
                     sum = sum + collected_followers[i].find(SLA_PLA[i].first[j])->second.size();
@@ -523,11 +523,11 @@ vector<edge_with_upperbound> get_follower_upper_bound(Graph& G, std::unordered_m
     return edges;
 }
 
-inline int get_support_upper_bound(Graph& G, int eid, vector<pair<int, int>>& hull_pair, std::unordered_set<int>& suv, bool* discard)     //¼ÆËãÖ§³Ö¶ÈÉÏ½ç
+inline int get_support_upper_bound(Graph& G, int eid, vector<pair<int, int>>& hull_pair, std::unordered_set<int>& suv, bool* discard)     //è®¡ç®—æ”¯æŒåº¦ä¸Šç•Œ
 {
 
 
-    pair<int, int> edge = G.edge2[eid];   //»ñÈ¡±ß
+    pair<int, int> edge = G.edge2[eid];   //è·å–è¾¹
 
     int trussness_eid = hull_pair[eid].first;
     int layer_eid = hull_pair[eid].second;
@@ -547,11 +547,11 @@ inline int get_support_upper_bound(Graph& G, int eid, vector<pair<int, int>>& hu
     std::unordered_set<int> comm = G.common_neighbor[edge];
 
 
-    for (auto iter = comm.begin(); iter != comm.end(); iter++)    // ±éÀú¸Ã±ßµÄËùÓĞ¹«¹²ÁÚ¾Ó
+    for (auto iter = comm.begin(); iter != comm.end(); iter++)    // éå†è¯¥è¾¹çš„æ‰€æœ‰å…¬å…±é‚»å±…
     {
         //cout << comm.size() << endl;
-        int w = *iter;    //wÎªµãxµÄÒ»¸öÁÚ¾Ó
-        //if (G.neighbor_hash[y].find(w) != G.neighbor_hash[y].end())    //ÕÒµ½Ò»¸öÈı½ÇĞÎ
+        int w = *iter;    //wä¸ºç‚¹xçš„ä¸€ä¸ªé‚»å±…
+        //if (G.neighbor_hash[y].find(w) != G.neighbor_hash[y].end())    //æ‰¾åˆ°ä¸€ä¸ªä¸‰è§’å½¢
         {
 
             int eid1 = G.edge[pair<int, int>(x, w)];
@@ -560,8 +560,8 @@ inline int get_support_upper_bound(Graph& G, int eid, vector<pair<int, int>>& hu
 
 
 
-            bool inner_1 = false;    //±ê×¢ÆäËûÁ½Ìõ±ßÊÇ·ñÊÇÄÚ²ã±ß
-            bool suv_1 = false;      //ÊÇ·ñÊÇÉú´æµÄ±ß
+            bool inner_1 = false;    //æ ‡æ³¨å…¶ä»–ä¸¤æ¡è¾¹æ˜¯å¦æ˜¯å†…å±‚è¾¹
+            bool suv_1 = false;      //æ˜¯å¦æ˜¯ç”Ÿå­˜çš„è¾¹
             int trussness_eid1 = hull_pair[eid1].first;
             //if (trussness_eid1 < trussness_eid) continue;
             int layer_eid1 = hull_pair[eid1].second;
@@ -589,7 +589,7 @@ inline int get_support_upper_bound(Graph& G, int eid, vector<pair<int, int>>& hu
 
 
 
-            if ((inner_1 || suv_1) && (inner_2 || suv_2))             //Á½Ìõ±ß¶¼Âú×ã£¬Ôòsupport upperbound++
+            if ((inner_1 || suv_1) && (inner_2 || suv_2))             //ä¸¤æ¡è¾¹éƒ½æ»¡è¶³ï¼Œåˆ™support upperbound++
             {
                 sup_upper++;
             }
@@ -608,10 +608,10 @@ struct Edge {
     }
 };
 
-void shrink(Graph& G, int discard_edge, std::unordered_set<int>* suv, bool* discard, int* sup, vector<pair<int, int>>& hull_pair, int K, int anchor_edge, vector<bool>(*used_to_suv), vector<bool>(*proccessed))  //µİ¹é·½Ê½µ÷Õû´æ»îµÄ±ßµÄsupport¡£
+void shrink(Graph& G, int discard_edge, std::unordered_set<int>* suv, bool* discard, int* sup, vector<pair<int, int>>& hull_pair, int K, int anchor_edge, vector<bool>(*used_to_suv), vector<bool>(*proccessed))  //é€’å½’æ–¹å¼è°ƒæ•´å­˜æ´»çš„è¾¹çš„supportã€‚
 {
 
-    pair<int, int> edge = G.edge2[discard_edge];   //»ñÈ¡±ß
+    pair<int, int> edge = G.edge2[discard_edge];   //è·å–è¾¹
     int x = edge.first;
     int y = edge.second;
     //if (G.neighbor[x].size() > G.neighbor[y].size()) {
@@ -622,12 +622,12 @@ void shrink(Graph& G, int discard_edge, std::unordered_set<int>* suv, bool* disc
    // std::unordered_set<int> comm = G.common_neighbor[edge];
 
 
-    for (auto iter = G.common_neighbor[edge].begin(); iter != G.common_neighbor[edge].end(); iter++)  // ±éÀú¸Ã±ßµÄËùÓĞ¹«¹²ÁÚ¾Ó
+    for (auto iter = G.common_neighbor[edge].begin(); iter != G.common_neighbor[edge].end(); iter++)  // éå†è¯¥è¾¹çš„æ‰€æœ‰å…¬å…±é‚»å±…
     {
-        int w = *iter;    //wÎªµãxµÄÒ»¸öÁÚ¾Ó
+        int w = *iter;    //wä¸ºç‚¹xçš„ä¸€ä¸ªé‚»å±…
 
-        // if (discard[e1] == true&&(*proccessed)[e1]==false) continue;   //Èô±ßÒÑ¾­±»discrd£¬Ôò¸ÃÈı½ÇĞÎ²»ÓÃ´¦Àí
-       // if (G.edge.find(pair<int, int>(y, w)) != G.edge.end())    //ÕÒµ½Ò»¸öÈı½ÇĞÎ
+        // if (discard[e1] == true&&(*proccessed)[e1]==false) continue;   //è‹¥è¾¹å·²ç»è¢«discrdï¼Œåˆ™è¯¥ä¸‰è§’å½¢ä¸ç”¨å¤„ç†
+       // if (G.edge.find(pair<int, int>(y, w)) != G.edge.end())    //æ‰¾åˆ°ä¸€ä¸ªä¸‰è§’å½¢
         {
 
 
@@ -641,26 +641,26 @@ void shrink(Graph& G, int discard_edge, std::unordered_set<int>* suv, bool* disc
             {
                 //if(discard[e1]==false&& (*proccessed)[e1] == false&& discard[e2] == true && (*proccessed)[e2] == false)
 
-                if (hull_pair[e1].first > hull_pair[e2].first)  //e1 ÊÇtrussnessĞ¡µÄÄÇÌõ±ß
+                if (hull_pair[e1].first > hull_pair[e2].first)  //e1 æ˜¯trussnesså°çš„é‚£æ¡è¾¹
                 {
                     int temp = e1;
                     e1 = e2;
-                    e2 = temp;       //½»»»Öµ
+                    e2 = temp;       //äº¤æ¢å€¼
                 }
 
 
 
-                if (hull_pair[e1].first == hull_pair[e2].first && hull_pair[discard_edge].first == hull_pair[e1].first && e1 != anchor_edge && e2 != anchor_edge)   //ÈıÌõ±ßtrussness¶¼ÏàÍ¬µÄÇé¿ö
+                if (hull_pair[e1].first == hull_pair[e2].first && hull_pair[discard_edge].first == hull_pair[e1].first && e1 != anchor_edge && e2 != anchor_edge)   //ä¸‰æ¡è¾¹trussnesséƒ½ç›¸åŒçš„æƒ…å†µ
                 {
 
 
 
 
-                    if (hull_pair[e1].second <= hull_pair[discard_edge].second && hull_pair[e2].second <= hull_pair[discard_edge].second)//ÆäËûÁ½Ìõ±ß²ãÊıÏàÍ¬²¢ÇÒÔÚdiscard edge Íâ²ã »ò±¾²ã
+                    if (hull_pair[e1].second <= hull_pair[discard_edge].second && hull_pair[e2].second <= hull_pair[discard_edge].second)//å…¶ä»–ä¸¤æ¡è¾¹å±‚æ•°ç›¸åŒå¹¶ä¸”åœ¨discard edge å¤–å±‚ æˆ–æœ¬å±‚
                     {
-                        if (hull_pair[e1].second < hull_pair[e2].second)    //ÈôÁ½Ìõ±ßlayerÓĞ´óÓĞĞ¡£¬ÇÒe1ÊÇĞ¡µÄÄÇ¸ö  //ÔòÖ»´¦Àíe1
+                        if (hull_pair[e1].second < hull_pair[e2].second)    //è‹¥ä¸¤æ¡è¾¹layeræœ‰å¤§æœ‰å°ï¼Œä¸”e1æ˜¯å°çš„é‚£ä¸ª  //åˆ™åªå¤„ç†e1
                         {
-                            if ((*suv).find(e1) != (*suv).end() && e1 != anchor_edge && discard[e2] == false)  //Á½Ìõ±ß¶¼suvµÄÇé¿öÏÂ£¬¶¼´¦Àí
+                            if ((*suv).find(e1) != (*suv).end() && e1 != anchor_edge && discard[e2] == false)  //ä¸¤æ¡è¾¹éƒ½suvçš„æƒ…å†µä¸‹ï¼Œéƒ½å¤„ç†
                             {
                                 sup[e1]--;
                                 if (sup[e1] < K - 1)
@@ -691,7 +691,7 @@ void shrink(Graph& G, int discard_edge, std::unordered_set<int>* suv, bool* disc
 
                         }
 
-                        if (hull_pair[e1].second > hull_pair[e2].second)    //ÈôÁ½Ìõ±ßlayerÓĞ´óÓĞĞ¡£¬ÇÒe2ÊÇĞ¡µÄÄÇ¸ö  //ÔòÖ»´¦Àíe2
+                        if (hull_pair[e1].second > hull_pair[e2].second)    //è‹¥ä¸¤æ¡è¾¹layeræœ‰å¤§æœ‰å°ï¼Œä¸”e2æ˜¯å°çš„é‚£ä¸ª  //åˆ™åªå¤„ç†e2
                         {
                             if ((*suv).find(e2) != (*suv).end() && e2 != anchor_edge && discard[e1] == false)
                             {
@@ -725,7 +725,7 @@ void shrink(Graph& G, int discard_edge, std::unordered_set<int>* suv, bool* disc
 
                         }
 
-                        if (hull_pair[e1].second == hull_pair[e2].second && discard[e1] == false && discard[e2] == false)//Èç¹ûÁ½Ìõ±ß²ãÊıÏàÍ¬
+                        if (hull_pair[e1].second == hull_pair[e2].second && discard[e1] == false && discard[e2] == false)//å¦‚æœä¸¤æ¡è¾¹å±‚æ•°ç›¸åŒ
                         {
                             if ((*suv).find(e1) != (*suv).end() && e1 != anchor_edge)
                             {
@@ -764,7 +764,7 @@ void shrink(Graph& G, int discard_edge, std::unordered_set<int>* suv, bool* disc
 
 
 
-                    if (hull_pair[e1].second <= hull_pair[discard_edge].second && hull_pair[e2].second > hull_pair[discard_edge].second)//ÆäËûÁ½Ìõ±ß²ãÊıÒ»´óÒ»Ğ¡£¬e1ÔÚdiscard»ò¸üÍâ²ã£¬e2ÔÚ¸üÄÚ²ã
+                    if (hull_pair[e1].second <= hull_pair[discard_edge].second && hull_pair[e2].second > hull_pair[discard_edge].second)//å…¶ä»–ä¸¤æ¡è¾¹å±‚æ•°ä¸€å¤§ä¸€å°ï¼Œe1åœ¨discardæˆ–æ›´å¤–å±‚ï¼Œe2åœ¨æ›´å†…å±‚
                     {
 
 
@@ -807,7 +807,7 @@ void shrink(Graph& G, int discard_edge, std::unordered_set<int>* suv, bool* disc
 
                     }
 
-                    if (hull_pair[e2].second <= hull_pair[discard_edge].second && hull_pair[e1].second > hull_pair[discard_edge].second)//ÆäËûÁ½Ìõ±ß²ãÊıÒ»´óÒ»Ğ¡£¬Ò»¸öÔÚdiscard»ò¸üÍâ²ã£¬Ò»¸öÔÚ¸üÄÚ²ã
+                    if (hull_pair[e2].second <= hull_pair[discard_edge].second && hull_pair[e1].second > hull_pair[discard_edge].second)//å…¶ä»–ä¸¤æ¡è¾¹å±‚æ•°ä¸€å¤§ä¸€å°ï¼Œä¸€ä¸ªåœ¨discardæˆ–æ›´å¤–å±‚ï¼Œä¸€ä¸ªåœ¨æ›´å†…å±‚
                     {
 
 
@@ -849,7 +849,7 @@ void shrink(Graph& G, int discard_edge, std::unordered_set<int>* suv, bool* disc
 
                     }
 
-                    if (hull_pair[e1].second > hull_pair[discard_edge].second && hull_pair[e2].second > hull_pair[discard_edge].second && (*used_to_suv)[discard_edge] == true && discard[e1] == false && discard[e2] == false)   //¶¼ÔÚÄÚ²ã  Õâ²¿·Ö¸Ğ¾õÓĞµãÎÊÌâ£¬µ«ÔËĞĞÆğÀ´Ã»³öbug
+                    if (hull_pair[e1].second > hull_pair[discard_edge].second && hull_pair[e2].second > hull_pair[discard_edge].second && (*used_to_suv)[discard_edge] == true && discard[e1] == false && discard[e2] == false)   //éƒ½åœ¨å†…å±‚  è¿™éƒ¨åˆ†æ„Ÿè§‰æœ‰ç‚¹é—®é¢˜ï¼Œä½†è¿è¡Œèµ·æ¥æ²¡å‡ºbug
                     {
                         if ((*suv).find(e1) != (*suv).end())
                         {
@@ -890,7 +890,7 @@ void shrink(Graph& G, int discard_edge, std::unordered_set<int>* suv, bool* disc
 
                 }
 
-                if (hull_pair[e1].first < hull_pair[e2].first && hull_pair[discard_edge].first == hull_pair[e1].first && e1 != anchor_edge && e2 != anchor_edge)  //ÓĞÒ»Ìõ±ßtrussness¸ü´ó
+                if (hull_pair[e1].first < hull_pair[e2].first && hull_pair[discard_edge].first == hull_pair[e1].first && e1 != anchor_edge && e2 != anchor_edge)  //æœ‰ä¸€æ¡è¾¹trussnessæ›´å¤§
                 {
                     if (hull_pair[e1].second <= hull_pair[discard_edge].second)
                     {
@@ -930,7 +930,7 @@ void shrink(Graph& G, int discard_edge, std::unordered_set<int>* suv, bool* disc
                     }
                 }
 
-                if (anchor_edge == e1 && hull_pair[e2].first == hull_pair[discard_edge].first)  //Èç¹ûÓĞÁ½ÌõµÄtrussnessÏàµÈ  ÓĞÒ»ÌõÎªanchor edge
+                if (anchor_edge == e1 && hull_pair[e2].first == hull_pair[discard_edge].first)  //å¦‚æœæœ‰ä¸¤æ¡çš„trussnessç›¸ç­‰  æœ‰ä¸€æ¡ä¸ºanchor edge
                 {
                     if (hull_pair[e2].second <= hull_pair[discard_edge].second)
                     {
@@ -971,7 +971,7 @@ void shrink(Graph& G, int discard_edge, std::unordered_set<int>* suv, bool* disc
                     }
                 }
 
-                if (anchor_edge == e2 && hull_pair[e1].first == hull_pair[discard_edge].first)  //Èç¹ûÓĞÁ½ÌõµÄtrussnessÏàµÈ  ÓĞÒ»ÌõÎªanchor edge
+                if (anchor_edge == e2 && hull_pair[e1].first == hull_pair[discard_edge].first)  //å¦‚æœæœ‰ä¸¤æ¡çš„trussnessç›¸ç­‰  æœ‰ä¸€æ¡ä¸ºanchor edge
                 {
                     if (hull_pair[e1].second <= hull_pair[discard_edge].second)
                     {
@@ -1027,47 +1027,47 @@ void shrink(Graph& G, int discard_edge, std::unordered_set<int>* suv, bool* disc
 
 }
 
-inline std::unordered_map<int, vector<int>> Get_Followers_With_Triangle_Path(Graph& G, int& anchor_edge, std::unordered_map<int, TreeNode>& TCT, vector<int>& containing_e, vector<pair<int, int>>& hull_pair, int& max_layer, std::unordered_set<int>& reuseable_node)    //ÕÒÄ³Ò»Ìõanchor edgeµÄfollowers
+inline std::unordered_map<int, vector<int>> Get_Followers_With_Triangle_Path(Graph& G, int& anchor_edge, std::unordered_map<int, TreeNode>& TCT, vector<int>& containing_e, vector<pair<int, int>>& hull_pair, int& max_layer, std::unordered_set<int>& reuseable_node)    //æ‰¾æŸä¸€æ¡anchor edgeçš„followers
 {
 
 
     const int size = G.m + 1;
     //vector<std::unordered_set<int>> neighbor_hash = G.neighbor_hash;
 
-    std::unordered_map<int, vector<int>> res;     //´æ´¢Éú´æµÄ±ß£¬Ò²¾ÍÊÇ¸úËæÕß,¶Ôfollower°´ÕÕÊ÷½á¹¹½øĞĞ·ÖÀà
+    std::unordered_map<int, vector<int>> res;     //å­˜å‚¨ç”Ÿå­˜çš„è¾¹ï¼Œä¹Ÿå°±æ˜¯è·Ÿéšè€…,å¯¹followeræŒ‰ç…§æ ‘ç»“æ„è¿›è¡Œåˆ†ç±»
 
 
-    map<int, priority_queue<Edge>> classified_edges;   //µÚÒ»¸öÖµÎªtreeµÄid  µÚ¶ş¸öÎª¶ÔÓ¦layer²ã µÄ±ß¼¯ºÏ
+    map<int, priority_queue<Edge>> classified_edges;   //ç¬¬ä¸€ä¸ªå€¼ä¸ºtreeçš„id  ç¬¬äºŒä¸ªä¸ºå¯¹åº”layerå±‚ çš„è¾¹é›†åˆ
 
     bool* ifexist = (bool*)mmap(nullptr, size * sizeof(bool), PROT_READ | PROT_WRITE, MAP_ANONYMOUS | MAP_PRIVATE, -1, 0);
     //vector<bool> ifexist(size, false);
     //bool* ifexist = new bool[size]();
-    //bool ifexist[G.m];  //±ê¼Ç¸Ã±ßÊÇÒÑ¾­ÔÚ´ı´¦ÀíµÄ¼¯ºÏÖĞ  ¹şÏ£´æ´¢¼ÓËÙ¼ÆËã
+    //bool ifexist[G.m];  //æ ‡è®°è¯¥è¾¹æ˜¯å·²ç»åœ¨å¾…å¤„ç†çš„é›†åˆä¸­  å“ˆå¸Œå­˜å‚¨åŠ é€Ÿè®¡ç®—
     //memset(ifexist, false, sizeof(ifexist));
 
     int x = G.edge2[anchor_edge].first;
     int y = G.edge2[anchor_edge].second;
 
-    for (int i = 0; i < G.neighbor[x].size(); i++)   //½«°üº¬anchorµÄÈı½ÇĞÎµÄ±ß°´Ê÷½á¹¹·ÖÀà
+    for (int i = 0; i < G.neighbor[x].size(); i++)   //å°†åŒ…å«anchorçš„ä¸‰è§’å½¢çš„è¾¹æŒ‰æ ‘ç»“æ„åˆ†ç±»
     {
         int w = G.neighbor[x][i];
-        if (G.edge.find(pair<int, int>(y, w)) != G.edge.end())   //ÕÒµ½Ò»¸öÈı½ÇĞÎ
+        if (G.edge.find(pair<int, int>(y, w)) != G.edge.end())   //æ‰¾åˆ°ä¸€ä¸ªä¸‰è§’å½¢
         {
             int e_1 = G.edge[pair<int, int>(x, w)];
             int e_2 = G.edge[pair<int, int>(y, w)];
 
 
-            if (hull_pair[e_1].first > hull_pair[e_2].first)  //e_1ÊÇtrussnessĞ¡µÄÄÇÌõ±ß
+            if (hull_pair[e_1].first > hull_pair[e_2].first)  //e_1æ˜¯trussnesså°çš„é‚£æ¡è¾¹
             {
                 int temp = e_1;
                 e_1 = e_2;
-                e_2 = temp;       //½»»»Öµ
+                e_2 = temp;       //äº¤æ¢å€¼
             }
 
 
-            if (hull_pair[e_1].first == hull_pair[e_2].first && hull_pair[e_1].first == hull_pair[anchor_edge].first)      //ÈôÈı½ÇĞÎµÄÆäËûÁ½Ìõ±ßtrussnessºÍanchor±ßÒ»Ñù´ó  
+            if (hull_pair[e_1].first == hull_pair[e_2].first && hull_pair[e_1].first == hull_pair[anchor_edge].first)      //è‹¥ä¸‰è§’å½¢çš„å…¶ä»–ä¸¤æ¡è¾¹trussnesså’Œanchorè¾¹ä¸€æ ·å¤§  
             {
-                if (hull_pair[e_1].second > hull_pair[anchor_edge].second && hull_pair[e_2].second > hull_pair[anchor_edge].second)  //²¢ÇÒÕâÁ½Ìõ±ßÔÚanchor_edgeµÄÄÚ²ã
+                if (hull_pair[e_1].second > hull_pair[anchor_edge].second && hull_pair[e_2].second > hull_pair[anchor_edge].second)  //å¹¶ä¸”è¿™ä¸¤æ¡è¾¹åœ¨anchor_edgeçš„å†…å±‚
                 {
 
                     ifexist[e_1] = true;
@@ -1077,7 +1077,7 @@ inline std::unordered_map<int, vector<int>> Get_Followers_With_Triangle_Path(Gra
                     e1.layer = hull_pair[e_1].second;
                     e2.id = e_2;
                     e2.layer = hull_pair[e_2].second;
-                    if (classified_edges.find(containing_e[anchor_edge]) == classified_edges.end())   //ÈômapÖĞÃ»ÓĞ
+                    if (classified_edges.find(containing_e[anchor_edge]) == classified_edges.end())   //è‹¥mapä¸­æ²¡æœ‰
                     {
 
                         priority_queue<Edge> buffer;
@@ -1087,8 +1087,8 @@ inline std::unordered_map<int, vector<int>> Get_Followers_With_Triangle_Path(Gra
                     }
                     else
                     {
-                        classified_edges[containing_e[anchor_edge]].push(e1);  //½«¸Ã±ß´æÈë¶ÔÓ¦¶ÓÁĞ
-                        classified_edges[containing_e[anchor_edge]].push(e2);  //½«¸Ã±ß´æÈë¶ÔÓ¦¶ÓÁĞ
+                        classified_edges[containing_e[anchor_edge]].push(e1);  //å°†è¯¥è¾¹å­˜å…¥å¯¹åº”é˜Ÿåˆ—
+                        classified_edges[containing_e[anchor_edge]].push(e2);  //å°†è¯¥è¾¹å­˜å…¥å¯¹åº”é˜Ÿåˆ—
                     }
 
 
@@ -1097,15 +1097,15 @@ inline std::unordered_map<int, vector<int>> Get_Followers_With_Triangle_Path(Gra
             }
 
 
-            if (hull_pair[anchor_edge].first == hull_pair[e_1].first && hull_pair[anchor_edge].first < hull_pair[e_2].first)                // ÈıÌõ±ßtrussness´óĞ¡ÊÇanchor_edge=e_1  e_2>e_1  e_2>anchor_edge
+            if (hull_pair[anchor_edge].first == hull_pair[e_1].first && hull_pair[anchor_edge].first < hull_pair[e_2].first)                // ä¸‰æ¡è¾¹trussnesså¤§å°æ˜¯anchor_edge=e_1  e_2>e_1  e_2>anchor_edge
             {
-                if (hull_pair[anchor_edge].second < hull_pair[e_1].second)    //²¢ÇÒÔÚanchoredgeµÄÄÚ²ã
+                if (hull_pair[anchor_edge].second < hull_pair[e_1].second)    //å¹¶ä¸”åœ¨anchoredgeçš„å†…å±‚
                 {
                     ifexist[e_1] = true;
                     Edge e1;
                     e1.id = e_1;
                     e1.layer = hull_pair[e_1].second;
-                    if (classified_edges.find(containing_e[anchor_edge]) == classified_edges.end())   //ÈômapÖĞÃ»ÓĞ
+                    if (classified_edges.find(containing_e[anchor_edge]) == classified_edges.end())   //è‹¥mapä¸­æ²¡æœ‰
                     {
                         priority_queue<Edge> buffer;
                         buffer.push(e1);
@@ -1114,14 +1114,14 @@ inline std::unordered_map<int, vector<int>> Get_Followers_With_Triangle_Path(Gra
                     }
                     else
                     {
-                        classified_edges[containing_e[anchor_edge]].push(e1);  //½«¸Ã±ß´æÈë¶ÔÓ¦¶ÓÁĞ
+                        classified_edges[containing_e[anchor_edge]].push(e1);  //å°†è¯¥è¾¹å­˜å…¥å¯¹åº”é˜Ÿåˆ—
                     }
                 }
             }
 
-            if (hull_pair[anchor_edge].first < hull_pair[e_1].first && hull_pair[anchor_edge].first < hull_pair[e_2].first)    //ÁíÍâÁ½Ìõ±ßµÄtrussness¶¼±Èanchoredge´ó
+            if (hull_pair[anchor_edge].first < hull_pair[e_1].first && hull_pair[anchor_edge].first < hull_pair[e_2].first)    //å¦å¤–ä¸¤æ¡è¾¹çš„trussnesséƒ½æ¯”anchoredgeå¤§
             {
-                if (hull_pair[e_1].first == hull_pair[e_2].first && hull_pair[e_2].first != INF)  //ÁíÍâÁ½Ìõ±ßµÄtrussnessÒ»Ñù´ó
+                if (hull_pair[e_1].first == hull_pair[e_2].first && hull_pair[e_2].first != INF)  //å¦å¤–ä¸¤æ¡è¾¹çš„trussnessä¸€æ ·å¤§
                 {
                     ifexist[e_1] = true;
                     ifexist[e_2] = true;
@@ -1130,7 +1130,7 @@ inline std::unordered_map<int, vector<int>> Get_Followers_With_Triangle_Path(Gra
                     e1.layer = hull_pair[e_1].second;
                     e2.id = e_2;
                     e2.layer = hull_pair[e_2].second;
-                    if (classified_edges.find(containing_e[e_1]) == classified_edges.end())   //ÈômapÖĞÃ»ÓĞ
+                    if (classified_edges.find(containing_e[e_1]) == classified_edges.end())   //è‹¥mapä¸­æ²¡æœ‰
                     {
                         priority_queue<Edge> buffer;
                         buffer.push(e1);
@@ -1138,10 +1138,10 @@ inline std::unordered_map<int, vector<int>> Get_Followers_With_Triangle_Path(Gra
                     }
                     else
                     {
-                        classified_edges[containing_e[e_1]].push(e1);  //½«¸Ã±ß´æÈë¶ÔÓ¦¶ÓÁĞ
+                        classified_edges[containing_e[e_1]].push(e1);  //å°†è¯¥è¾¹å­˜å…¥å¯¹åº”é˜Ÿåˆ—
                     }
 
-                    if (classified_edges.find(containing_e[e_2]) == classified_edges.end())   //ÈômapÖĞÃ»ÓĞ
+                    if (classified_edges.find(containing_e[e_2]) == classified_edges.end())   //è‹¥mapä¸­æ²¡æœ‰
                     {
                         priority_queue<Edge> buffer;
                         buffer.push(e2);
@@ -1149,18 +1149,18 @@ inline std::unordered_map<int, vector<int>> Get_Followers_With_Triangle_Path(Gra
                     }
                     else
                     {
-                        classified_edges[containing_e[e_2]].push(e2);  //½«¸Ã±ß´æÈë¶ÔÓ¦¶ÓÁĞ
+                        classified_edges[containing_e[e_2]].push(e2);  //å°†è¯¥è¾¹å­˜å…¥å¯¹åº”é˜Ÿåˆ—
                     }
 
                 }
 
-                if (hull_pair[e_1].first < hull_pair[e_2].first)   //ÁíÍâÁ½Ìõ±ßµÄtrussnessÒ»´óÒ»Ğ¡
+                if (hull_pair[e_1].first < hull_pair[e_2].first)   //å¦å¤–ä¸¤æ¡è¾¹çš„trussnessä¸€å¤§ä¸€å°
                 {
                     ifexist[e_1] = true;
                     Edge e1;
                     e1.id = e_1;
                     e1.layer = hull_pair[e_1].second;
-                    if (classified_edges.find(containing_e[e_1]) == classified_edges.end())   //ÈômapÖĞÃ»ÓĞ
+                    if (classified_edges.find(containing_e[e_1]) == classified_edges.end())   //è‹¥mapä¸­æ²¡æœ‰
                     {
                         priority_queue<Edge> buffer;
                         buffer.push(e1);
@@ -1168,14 +1168,14 @@ inline std::unordered_map<int, vector<int>> Get_Followers_With_Triangle_Path(Gra
                     }
                     else
                     {
-                        classified_edges[containing_e[e_1]].push(e1);  //½«¸Ã±ß´æÈë¶ÔÓ¦¶ÓÁĞ
+                        classified_edges[containing_e[e_1]].push(e1);  //å°†è¯¥è¾¹å­˜å…¥å¯¹åº”é˜Ÿåˆ—
                     }
                 }
             }
 
         }
     }
-    //¹ã¶ÈËÑË÷Ã¿¸öÊ÷½ÚµãµÄpath
+    //å¹¿åº¦æœç´¢æ¯ä¸ªæ ‘èŠ‚ç‚¹çš„path
 
 
 
@@ -1189,15 +1189,15 @@ inline std::unordered_map<int, vector<int>> Get_Followers_With_Triangle_Path(Gra
 
 
     int a = 0;
-    std::unordered_set<int> suv;            //ÒÔ¹şÏ£±íµÄĞÎÊ½´æ´¢´æ»îµÄ±ß
+    std::unordered_set<int> suv;            //ä»¥å“ˆå¸Œè¡¨çš„å½¢å¼å­˜å‚¨å­˜æ´»çš„è¾¹
     //unordered_set<int> discard;
     //unordered_set<int> visited;
 
-    for (auto iter = classified_edges.begin(); iter != classified_edges.end(); iter++)   //Ò»´Î´¦ÀíÒ»¸ötreenode
+    for (auto iter = classified_edges.begin(); iter != classified_edges.end(); iter++)   //ä¸€æ¬¡å¤„ç†ä¸€ä¸ªtreenode
     {
 
 
-        int treeid = iter->first;   //µÃµ½treeid
+        int treeid = iter->first;   //å¾—åˆ°treeid
         if (reuseable_node.find(treeid) != reuseable_node.end()) continue;
 
 
@@ -1217,7 +1217,7 @@ inline std::unordered_map<int, vector<int>> Get_Followers_With_Triangle_Path(Gra
         bool* visited = (bool*)mmap(nullptr, size * sizeof(bool), PROT_READ | PROT_WRITE, MAP_ANONYMOUS | MAP_PRIVATE, -1, 0);
         bool* discard = (bool*)mmap(nullptr, size * sizeof(bool), PROT_READ | PROT_WRITE, MAP_ANONYMOUS | MAP_PRIVATE, -1, 0);
         //bool* discard = new bool[size]();
-        //bool* visited = new bool[size]();      //±ê¼Ç¸Ã±ßÊÇ·ñ´¦Àí¹ı
+        //bool* visited = new bool[size]();      //æ ‡è®°è¯¥è¾¹æ˜¯å¦å¤„ç†è¿‡
         //int* s = new int[size]();
        // std::fill(discard, discard + G.m+1, false);
        // std::fill(visited, visited + G.m+1, false);
@@ -1226,11 +1226,11 @@ inline std::unordered_map<int, vector<int>> Get_Followers_With_Triangle_Path(Gra
 
 
         visited[anchor_edge] = true;
-        suv.insert(anchor_edge);   //ÉèÖÃanchor edgeÎª´æ»î.
-        //vector<int> s(G.m + 1, 0);                    //´æ´¢±ßµÄsupport upper bound, ³õÊ¼»¯Îª0
+        suv.insert(anchor_edge);   //è®¾ç½®anchor edgeä¸ºå­˜æ´».
+        //vector<int> s(G.m + 1, 0);                    //å­˜å‚¨è¾¹çš„support upper bound, åˆå§‹åŒ–ä¸º0
 
 
-        //½øĞĞlayer by layer search
+        //è¿›è¡Œlayer by layer search
 
 
         int K;
@@ -1253,19 +1253,19 @@ inline std::unordered_map<int, vector<int>> Get_Followers_With_Triangle_Path(Gra
 
 
 
-            if (sup >= K - 1)                       //Èôsupport upper×î´óµÄ±ßÂú×ãÒªÇó£¬Ôò´¦Àí¸Ã±ß
+            if (sup >= K - 1)                       //è‹¥support upperæœ€å¤§çš„è¾¹æ»¡è¶³è¦æ±‚ï¼Œåˆ™å¤„ç†è¯¥è¾¹
             {
 
                 // auto start_SLA = std::chrono::high_resolution_clock::now();
-                if (visited[e] == false)             //·ÀÖ¹ÖØ¸´¼ÆËã
+                if (visited[e] == false)             //é˜²æ­¢é‡å¤è®¡ç®—
                 {
-                    suv.insert(e);                     //¼ÓÈësuv¼¯ºÏ
-                    //¼ÆËãstrong triangle
+                    suv.insert(e);                     //åŠ å…¥suvé›†åˆ
+                    //è®¡ç®—strong triangle
                     s[e] = sup;
                     int u = G.edge2[e].first;
                     int v = G.edge2[e].second;
 
-                    //if (G.neighbor_hash[v].size() < G.neighbor_hash[u].size())   //±È½ÏÁ½Õß¶ÈÊı£¬°ÑÁÚ¾ÓÊıÁ¿¶àµÄ¸³¸øx
+                    //if (G.neighbor_hash[v].size() < G.neighbor_hash[u].size())   //æ¯”è¾ƒä¸¤è€…åº¦æ•°ï¼ŒæŠŠé‚»å±…æ•°é‡å¤šçš„èµ‹ç»™x
                     //{
                        // int t = v;
                       //  v = u;
@@ -1273,10 +1273,10 @@ inline std::unordered_map<int, vector<int>> Get_Followers_With_Triangle_Path(Gra
                     //}
                     //vector<pair<int, int>> del;
 
-                    for (auto ite = G.common_neighbor[pair<int, int>(u, v)].begin(); ite != G.common_neighbor[pair<int, int>(u, v)].end(); ite++)   //½«°üº¬anchorµÄÈı½ÇĞÎµÄ±ß°´Ê÷½á¹¹·ÖÀà
+                    for (auto ite = G.common_neighbor[pair<int, int>(u, v)].begin(); ite != G.common_neighbor[pair<int, int>(u, v)].end(); ite++)   //å°†åŒ…å«anchorçš„ä¸‰è§’å½¢çš„è¾¹æŒ‰æ ‘ç»“æ„åˆ†ç±»
                     {
                         int w = *ite;
-                        //if (G.neighbor_hash[v].find(w) != G.neighbor_hash[v].end())   //ÕÒµ½Ò»¸öÈı½ÇĞÎ
+                        //if (G.neighbor_hash[v].find(w) != G.neighbor_hash[v].end())   //æ‰¾åˆ°ä¸€ä¸ªä¸‰è§’å½¢
                         {
                             int e_1 = G.edge[pair<int, int>(u, w)];
                             int e_2 = G.edge[pair<int, int>(v, w)];
@@ -1284,11 +1284,11 @@ inline std::unordered_map<int, vector<int>> Get_Followers_With_Triangle_Path(Gra
 
 
 
-                            if (hull_pair[e_1].first > hull_pair[e_2].first)  //e_1ÊÇtrussnessĞ¡µÄÄÇÌõ±ß
+                            if (hull_pair[e_1].first > hull_pair[e_2].first)  //e_1æ˜¯trussnesså°çš„é‚£æ¡è¾¹
                             {
                                 int temp = e_1;
                                 e_1 = e_2;
-                                e_2 = temp;       //½»»»Öµ
+                                e_2 = temp;       //äº¤æ¢å€¼
                             }
                             Edge e1, e2;
                             e1.id = e_1;
@@ -1296,29 +1296,29 @@ inline std::unordered_map<int, vector<int>> Get_Followers_With_Triangle_Path(Gra
                             e2.id = e_2;
                             e2.layer = hull_pair[e_2].second;
 
-                            if (hull_pair[e_1].first == hull_pair[e_2].first && hull_pair[e_1].first == hull_pair[e].first)      //ÈôÈı½ÇĞÎµÄÆäËûÁ½Ìõ±ßtrussnessºÍe±ßÒ»Ñù´ó  
+                            if (hull_pair[e_1].first == hull_pair[e_2].first && hull_pair[e_1].first == hull_pair[e].first)      //è‹¥ä¸‰è§’å½¢çš„å…¶ä»–ä¸¤æ¡è¾¹trussnesså’Œeè¾¹ä¸€æ ·å¤§  
                             {
-                                if (hull_pair[e_1].second > hull_pair[e].second && hull_pair[e_2].second > hull_pair[e].second)  //²¢ÇÒÕâÁ½Ìõ±ßÔÚanchor_edgeµÄÄÚ²ã
+                                if (hull_pair[e_1].second > hull_pair[e].second && hull_pair[e_2].second > hull_pair[e].second)  //å¹¶ä¸”è¿™ä¸¤æ¡è¾¹åœ¨anchor_edgeçš„å†…å±‚
                                 {
                                     if (visited[e_1] == false && ifexist[e_1] == false)
                                     {
                                         ifexist[e_1] = true;
-                                        classified_edges[treeid].push(e1);  //½«¸Ã±ß´æÈë¶ÔÓ¦¶ÓÁĞ
+                                        classified_edges[treeid].push(e1);  //å°†è¯¥è¾¹å­˜å…¥å¯¹åº”é˜Ÿåˆ—
                                     }
 
                                     if (visited[e_2] == false && ifexist[e_2] == false)
                                     {
                                         ifexist[e_2] = true;
-                                        classified_edges[treeid].push(e2);  //½«¸Ã±ß´æÈë¶ÔÓ¦¶ÓÁĞ
+                                        classified_edges[treeid].push(e2);  //å°†è¯¥è¾¹å­˜å…¥å¯¹åº”é˜Ÿåˆ—
                                     }
                                 }
 
-                                if (hull_pair[e_1].second == hull_pair[e].second && hull_pair[e_2].second > hull_pair[e].second && discard[e_1] == false)   //weak triangle µÄÇé¿ö
+                                if (hull_pair[e_1].second == hull_pair[e].second && hull_pair[e_2].second > hull_pair[e].second && discard[e_1] == false)   //weak triangle çš„æƒ…å†µ
                                 {
                                     if (visited[e_2] == false && ifexist[e_2] == false)
                                     {
                                         ifexist[e_2] = true;
-                                        classified_edges[treeid].push(e2);  //½«¸Ã±ß´æÈë¶ÔÓ¦¶ÓÁĞ
+                                        classified_edges[treeid].push(e2);  //å°†è¯¥è¾¹å­˜å…¥å¯¹åº”é˜Ÿåˆ—
                                     }
 
                                     if (visited[e_1] == false && ifexist[e_1] == false)
@@ -1329,12 +1329,12 @@ inline std::unordered_map<int, vector<int>> Get_Followers_With_Triangle_Path(Gra
 
                                 }
 
-                                if (hull_pair[e_2].second == hull_pair[e].second && hull_pair[e_1].second > hull_pair[e].second && discard[e_2] == false)   //weak triangle µÄÇé¿ö
+                                if (hull_pair[e_2].second == hull_pair[e].second && hull_pair[e_1].second > hull_pair[e].second && discard[e_2] == false)   //weak triangle çš„æƒ…å†µ
                                 {
                                     if (visited[e_1] == false && ifexist[e_1] == false)
                                     {
                                         ifexist[e_1] = true;
-                                        classified_edges[treeid].push(e1);  //½«¸Ã±ß´æÈë¶ÔÓ¦¶ÓÁĞ
+                                        classified_edges[treeid].push(e1);  //å°†è¯¥è¾¹å­˜å…¥å¯¹åº”é˜Ÿåˆ—
                                     }
                                     if (visited[e_2] == false && ifexist[e_2] == false)
                                     {
@@ -1361,37 +1361,37 @@ inline std::unordered_map<int, vector<int>> Get_Followers_With_Triangle_Path(Gra
                                 }
                             }
 
-                            if (hull_pair[e].first == hull_pair[e_1].first && hull_pair[e].first < hull_pair[e_2].first)                // ÈıÌõ±ßtrussness´óĞ¡ÊÇanchor_edge=e_1  e_2>e_1  e_2>e
+                            if (hull_pair[e].first == hull_pair[e_1].first && hull_pair[e].first < hull_pair[e_2].first)                // ä¸‰æ¡è¾¹trussnesså¤§å°æ˜¯anchor_edge=e_1  e_2>e_1  e_2>e
                             {
-                                if (hull_pair[e].second < hull_pair[e_1].second)    //²¢ÇÒÔÚanchoredgeµÄÄÚ²ã
+                                if (hull_pair[e].second < hull_pair[e_1].second)    //å¹¶ä¸”åœ¨anchoredgeçš„å†…å±‚
                                 {
                                     if (visited[e_1] == false && ifexist[e_1] == false)
                                     {
                                         ifexist[e_1] = true;
-                                        classified_edges[treeid].push(e1);  //½«¸Ã±ß´æÈë¶ÔÓ¦¶ÓÁĞ
+                                        classified_edges[treeid].push(e1);  //å°†è¯¥è¾¹å­˜å…¥å¯¹åº”é˜Ÿåˆ—
                                     }
 
                                 }
 
-                                if (hull_pair[e].second == hull_pair[e_1].second)    //²¢ÇÒÔÚanchoredgeµÄ±¾²ã
+                                if (hull_pair[e].second == hull_pair[e_1].second)    //å¹¶ä¸”åœ¨anchoredgeçš„æœ¬å±‚
                                 {
                                     if (visited[e_1] == false && ifexist[e_1] == false)
                                     {
                                         ifexist[e_1] = true;
-                                        classified_edges[treeid].push(e1);  //½«¸Ã±ß´æÈë¶ÔÓ¦¶ÓÁĞ
+                                        classified_edges[treeid].push(e1);  //å°†è¯¥è¾¹å­˜å…¥å¯¹åº”é˜Ÿåˆ—
                                     }
 
                                 }
                             }
 
 
-                        }       //ÕÒÈı½ÇĞÎ
+                        }       //æ‰¾ä¸‰è§’å½¢
 
                     }
 
 
                     visited[e] = true;
-                    // Q.erase(std::remove(Q.begin(), Q.end(), eid_maxsup), Q.end());    //´¦ÀíÍê¾Í´ÓQ¼¯ºÏÖĞÉ¾³ı
+                    // Q.erase(std::remove(Q.begin(), Q.end(), eid_maxsup), Q.end());    //å¤„ç†å®Œå°±ä»Qé›†åˆä¸­åˆ é™¤
 
                 }
                 //auto end_SLA = std::chrono::high_resolution_clock::now();
@@ -1402,11 +1402,11 @@ inline std::unordered_map<int, vector<int>> Get_Followers_With_Triangle_Path(Gra
 
             }
 
-            else   //Èôsupport upper×î´óµÄ±ß¶¼²»Âú×ãÒªÇó£¬Ôò½«Q¼¯ºÏÖĞÆäËûµÄ±ßÉèÖÃÎª¶ªÆú
+            else   //è‹¥support upperæœ€å¤§çš„è¾¹éƒ½ä¸æ»¡è¶³è¦æ±‚ï¼Œåˆ™å°†Qé›†åˆä¸­å…¶ä»–çš„è¾¹è®¾ç½®ä¸ºä¸¢å¼ƒ
             {
 
-                discard[e] = true;   //²»Âú×ãsupportcheckµÄ±ß½«±»¶ªÆú
-                s[e] = -1;  //ÉèÖÃÎª¶ªÆú
+                discard[e] = true;   //ä¸æ»¡è¶³supportcheckçš„è¾¹å°†è¢«ä¸¢å¼ƒ
+                s[e] = -1;  //è®¾ç½®ä¸ºä¸¢å¼ƒ
                 // cout << e << endl;
                  //vector<bool> proccessed(G.m, false);
 
@@ -1420,7 +1420,7 @@ inline std::unordered_map<int, vector<int>> Get_Followers_With_Triangle_Path(Gra
 
 
 
-                //¸üĞÂÒòÎªdiscard±ß¶øÊÜµ½Ó°ÏìµÄsupport.
+                //æ›´æ–°å› ä¸ºdiscardè¾¹è€Œå—åˆ°å½±å“çš„support.
 
             }
 
@@ -1460,24 +1460,24 @@ inline std::unordered_map<int, vector<int>> Get_Followers_With_Triangle_Path(Gra
     return res;
 }
 
-void Update_trussness(Graph* G, int anchor_edge, std::unordered_map<int, vector<int>> followers)//¸üĞÂanchorÒ»Ìõ±ßºóµÄfollowers
+void Update_trussness(Graph* G, int anchor_edge, std::unordered_map<int, vector<int>> followers)//æ›´æ–°anchorä¸€æ¡è¾¹åçš„followers
 {
     (*G).Truss_Table[(*G).trussness[anchor_edge]].erase(remove((*G).Truss_Table[(*G).trussness[anchor_edge]].begin(), (*G).Truss_Table[(*G).trussness[anchor_edge]].end(), anchor_edge), (*G).Truss_Table[(*G).trussness[anchor_edge]].end());
-    (*G).trussness[anchor_edge] = INF;   //½«anchor edgeµÄtrussnessÖµÉèÎªÎŞÇî´ó
-    (*G).sup[anchor_edge] = INF;   //½«anchor±ßµÄÖ§³Ö¶ÈÉèÖÃÎªÎŞÇî´ó
+    (*G).trussness[anchor_edge] = INF;   //å°†anchor edgeçš„trussnesså€¼è®¾ä¸ºæ— ç©·å¤§
+    (*G).sup[anchor_edge] = INF;   //å°†anchorè¾¹çš„æ”¯æŒåº¦è®¾ç½®ä¸ºæ— ç©·å¤§
 
 
-    for (auto iter = followers.begin(); iter != followers.end(); iter++)  //¸üĞÂtrussness£¬trussness table
+    for (auto iter = followers.begin(); iter != followers.end(); iter++)  //æ›´æ–°trussnessï¼Œtrussness table
     {
         for (int i = 0; i < iter->second.size(); i++)
         {
             int trussness = (*G).trussness[iter->second[i]];
-            //¸üĞÂtrussTable
+            //æ›´æ–°trussTable
             (*G).Truss_Table[trussness].erase(remove((*G).Truss_Table[trussness].begin(), (*G).Truss_Table[trussness].end(), iter->second[i]), (*G).Truss_Table[trussness].end());
             (*G).Truss_Table[trussness + 1].push_back(iter->second[i]);
 
 
-            (*G).trussness[iter->second[i]]++;     //¸üĞÂfollowersµÄtrussness
+            (*G).trussness[iter->second[i]]++;     //æ›´æ–°followersçš„trussness
             if ((*G).trussness[iter->second[i]] > (*G).maxTrussness)
             {
                 (*G).maxTrussness = (*G).trussness[iter->second[i]];
@@ -1487,14 +1487,14 @@ void Update_trussness(Graph* G, int anchor_edge, std::unordered_map<int, vector<
 
 }
 
-vector<std::unordered_set<int>> follower_reuse_update(int anchor_edge, Graph* G, std::unordered_map<int, TreeNode>* TCT, vector<pair<vector<int>, vector<int>>>* SLA_PLA, vector<int>* containing_e, std::unordered_map<int, vector<int>>& followers)   //¸ù¾İÑ¡ÔñµÄanchor edge¸üĞÂÊ÷½á¹¹£¬²¢¼ÆËã³ö²»ĞèÒªÖØĞÂ¼ÆËãµÄfollowers
+vector<std::unordered_set<int>> follower_reuse_update(int anchor_edge, Graph* G, std::unordered_map<int, TreeNode>* TCT, vector<pair<vector<int>, vector<int>>>* SLA_PLA, vector<int>* containing_e, std::unordered_map<int, vector<int>>& followers)   //æ ¹æ®é€‰æ‹©çš„anchor edgeæ›´æ–°æ ‘ç»“æ„ï¼Œå¹¶è®¡ç®—å‡ºä¸éœ€è¦é‡æ–°è®¡ç®—çš„followers
 {
 
    
-    vector<std::unordered_set<int>> res((*G).m);   //Õë¶ÔÃ¿¸öedge´æ·Å¿ÉÒÔreuseµÄÊ÷½Úµã
+    vector<std::unordered_set<int>> res((*G).m);   //é’ˆå¯¹æ¯ä¸ªedgeå­˜æ”¾å¯ä»¥reuseçš„æ ‘èŠ‚ç‚¹
 
 
-    for (int i = 0; i < (*G).m; i++)//³õÊ¼»¯res
+    for (int i = 0; i < (*G).m; i++)//åˆå§‹åŒ–res
     {
         for (int j = 0; j < (*SLA_PLA)[i].first.size(); j++)
         {
@@ -1503,12 +1503,12 @@ vector<std::unordered_set<int>> follower_reuse_update(int anchor_edge, Graph* G,
 
     }
 
-    unordered_set<int> un_reauseable_id; //´æ´¢ËùÓĞ²»ÄÜreuseµÄnode id
-    //°Ñ sla(anchor_edge) ÖĞµÄ±ßµÄPLA ÖĞµÄ±ßÓësla(anchor_edge)½»¼¯²¿·ÖÉ¾³ı
+    unordered_set<int> un_reauseable_id; //å­˜å‚¨æ‰€æœ‰ä¸èƒ½reuseçš„node id
+    //æŠŠ sla(anchor_edge) ä¸­çš„è¾¹çš„PLA ä¸­çš„è¾¹ä¸sla(anchor_edge)äº¤é›†éƒ¨åˆ†åˆ é™¤
     vector<int> E_ex;
 
-    bool a = false; //±ê¼Çsla£¨anchor£©ÊÇ·ñ°üº¬ containinge[anchor]
-    for (int i = 0; i < (*SLA_PLA)[anchor_edge].first.size(); i++)   //ËÑ¼¯sla£¨ex£©µÄËùÓĞ±ß
+    bool a = false; //æ ‡è®°slaï¼ˆanchorï¼‰æ˜¯å¦åŒ…å« containinge[anchor]
+    for (int i = 0; i < (*SLA_PLA)[anchor_edge].first.size(); i++)   //æœé›†slaï¼ˆexï¼‰çš„æ‰€æœ‰è¾¹
     {
         if ((*SLA_PLA)[anchor_edge].first[i] == (*containing_e)[anchor_edge]) { a = true; }
         TreeNode node = (*TCT).find((*SLA_PLA)[anchor_edge].first[i])->second;
@@ -1538,7 +1538,7 @@ vector<std::unordered_set<int>> follower_reuse_update(int anchor_edge, Graph* G,
 
     //auto aaa = std::chrono::high_resolution_clock::now();
     //t=t+ std::chrono::duration_cast<std::chrono::microseconds>(aaa - aaaa).count();
-    //for (int i = 0; i < E_ex.size(); i++)         // °Ñ²»ÄÜreuseµÄ²¿·ÖÉ¾³ı
+    //for (int i = 0; i < E_ex.size(); i++)         // æŠŠä¸èƒ½reuseçš„éƒ¨åˆ†åˆ é™¤
     //{
     //    int id = (*containing_e)[E_ex[i]];
 
@@ -1555,19 +1555,19 @@ vector<std::unordered_set<int>> follower_reuse_update(int anchor_edge, Graph* G,
 
 
     Update_trussness(G, anchor_edge, followers);
-    //¸üĞÂtrussness ºÍlayer,ÖØ¹¹×ÓÊ÷
+    //æ›´æ–°trussness å’Œlayer,é‡æ„å­æ ‘
 
     //auto aaaa = std::chrono::high_resolution_clock::now();
-    //ËÑ¼¯ÒÔanchor edgeËùÔÚÊ÷½ÚµãÎª¸ùµÄ×ÓÊ÷µÄ±ß
+    //æœé›†ä»¥anchor edgeæ‰€åœ¨æ ‘èŠ‚ç‚¹ä¸ºæ ¹çš„å­æ ‘çš„è¾¹
     vector<pair<int, int>> edges;
     int rootid = (*TCT).find((*containing_e)[anchor_edge])->second.P;
-    if (rootid != -1)  //Èô¸Ã½Úµã²»ÊÇ¸ù½Úµã
+    if (rootid != -1)  //è‹¥è¯¥èŠ‚ç‚¹ä¸æ˜¯æ ¹èŠ‚ç‚¹
     {
-        (*TCT).find(rootid)->second.C.erase(remove((*TCT).find(rootid)->second.C.begin(), (*TCT).find(rootid)->second.C.end(), (*containing_e)[anchor_edge]), (*TCT).find(rootid)->second.C.end());   //É¾³ıchildĞÅÏ¢
+        (*TCT).find(rootid)->second.C.erase(remove((*TCT).find(rootid)->second.C.begin(), (*TCT).find(rootid)->second.C.end(), (*containing_e)[anchor_edge]), (*TCT).find(rootid)->second.C.end());   //åˆ é™¤childä¿¡æ¯
     }
 
-    //std::unordered_map<int, TreeNode> tree_buffer;  //´æ´¢Ô­ÏÈµÄÊ÷½Úµã;
-    queue<int> Q;    //¹ã¶ÈËÑ¼¯
+    //std::unordered_map<int, TreeNode> tree_buffer;  //å­˜å‚¨åŸå…ˆçš„æ ‘èŠ‚ç‚¹;
+    queue<int> Q;    //å¹¿åº¦æœé›†
     Q.push((*containing_e)[anchor_edge]);
 
 
@@ -1586,9 +1586,9 @@ vector<std::unordered_set<int>> follower_reuse_update(int anchor_edge, Graph* G,
        // tree_buffer[id] = node;
         (*TCT).erase(id);
     }
-    //Ê÷ÀïÃæfollowerµÄºÏ²¢»áµ¼ÖÂid·¢Éú±ä»¯£¬Èç¹û±äÁË£¬ÄÇ²»ÓÃ¹Ü¡£
+    //æ ‘é‡Œé¢followerçš„åˆå¹¶ä¼šå¯¼è‡´idå‘ç”Ÿå˜åŒ–ï¼Œå¦‚æœå˜äº†ï¼Œé‚£ä¸ç”¨ç®¡ã€‚
 
-    tree((*G), edges, rootid, TCT);   //ÖØ¹¹×ÓÊ÷
+    tree((*G), edges, rootid, TCT);   //é‡æ„å­æ ‘
 
 
     //cout << "tree finish!" << endl;
@@ -1596,7 +1596,7 @@ vector<std::unordered_set<int>> follower_reuse_update(int anchor_edge, Graph* G,
     //t=t+ std::chrono::duration_cast<std::chrono::microseconds>(aaa - aaaa).count();
     //auto aaaa = std::chrono::high_resolution_clock::now();
 
-    //ÖØĞÂ¼ÆËãSLA_PLA  ºÍLA  containing_e
+    //é‡æ–°è®¡ç®—SLA_PLA  å’ŒLA  containing_e
 
 
 
@@ -1609,7 +1609,7 @@ vector<std::unordered_set<int>> follower_reuse_update(int anchor_edge, Graph* G,
 
 
     vector<int> E_ex_buffer;
-    vector<bool> if_insert((*G).m, false); //·ÀÖ¹Êı¾İÖØ¸´²åÈë
+    vector<bool> if_insert((*G).m, false); //é˜²æ­¢æ•°æ®é‡å¤æ’å…¥
 
     for (int i = 0; i < E_ex.size(); i++)
     {
@@ -1637,7 +1637,7 @@ vector<std::unordered_set<int>> follower_reuse_update(int anchor_edge, Graph* G,
 
     //aaa = std::chrono::high_resolution_clock::now();
     //t = t + std::chrono::duration_cast<std::chrono::microseconds>(aaa - aaaa).count();
-    //for (int i = 0; i < E_ex_buffer.size(); i++)         // °Ñ²»ÄÜreuseµÄ²¿·ÖÉ¾³ı
+    //for (int i = 0; i < E_ex_buffer.size(); i++)         // æŠŠä¸èƒ½reuseçš„éƒ¨åˆ†åˆ é™¤
     //{
     //    if (find(E_ex.begin(), E_ex.end(), E_ex_buffer[i]) != E_ex.end()) continue;
 
@@ -1657,7 +1657,7 @@ vector<std::unordered_set<int>> follower_reuse_update(int anchor_edge, Graph* G,
     return res;
 }
 
-vector<int> GAS(Graph& G, int b)   //°üº¬ÁËtree£¬path£¬ºÍcandidate¼ôÖ¦ºÍupper boundµÄËã·¨
+vector<int> GAS(Graph& G, int b)   
 {
     auto s = std::chrono::high_resolution_clock::now();
     auto start = std::chrono::high_resolution_clock::now();
@@ -1667,11 +1667,11 @@ vector<int> GAS(Graph& G, int b)   //°üº¬ÁËtree£¬path£¬ºÍcandidate¼ôÖ¦ºÍupper bo
     TreeNode rootnode;
     int max_layer = 0;
     int trussness_gain = 0;
-    vector<bool> ifanchored(G.m, false);//¼ÇÂ¼ÒÑ¾­anchorµÄ±ß£¬²»ÔÙ¼ÆËã
-    vector<std::unordered_set<int>> reuseable_node(G.m);  //´æ·Å¿ÉÒÔreuseµÄtreenode
+    vector<bool> ifanchored(G.m, false);//è®°å½•å·²ç»anchorçš„è¾¹ï¼Œä¸å†è®¡ç®—
+    vector<std::unordered_set<int>> reuseable_node(G.m);  //å­˜æ”¾å¯ä»¥reuseçš„treenode
 
-    vector<std::unordered_map<int, vector<int>>> collected_followers(G.m);  //´æ·Åfollowers
-    vector<int> number(G.m, 0);  //´æ·Å¶ÔÓ¦µÄfollowersÊıÁ¿
+    vector<std::unordered_map<int, vector<int>>> collected_followers(G.m);  //å­˜æ”¾followers
+    vector<int> number(G.m, 0);  //å­˜æ”¾å¯¹åº”çš„followersæ•°é‡
     vector<bool> ifcomputed(G.m, false);
 
 
@@ -1705,7 +1705,6 @@ vector<int> GAS(Graph& G, int b)   //°üº¬ÁËtree£¬path£¬ºÍcandidate¼ôÖ¦ºÍupper bo
         std::unordered_map<int, vector<int>> selected_followers;
 
 
-        //¼ÆËãÃ¿Ìõ±ßµÄfollower upper bound£¬²¢°´´Ó´óµ½Ğ¡µÄË³Ğò´¦Àí¡£
 
 
         vector<edge_with_upperbound> follower_upper_bound_ordered_edge = get_follower_upper_bound(G, &Tree, SLA_PLA, collected_followers, reuseable_node, ifcomputed);
@@ -1715,7 +1714,7 @@ vector<int> GAS(Graph& G, int b)   //°üº¬ÁËtree£¬path£¬ºÍcandidate¼ôÖ¦ºÍupper bo
         {
             if (ifanchored[follower_upper_bound_ordered_edge[i].eid] == true) continue;
             //cout << i << endl;
-            //Èô·¢ÏÖ¿ÉÒÔreuse£¬Ôò²»ÔÙ¼ÆËã
+            //è‹¥å‘ç°å¯ä»¥reuseï¼Œåˆ™ä¸å†è®¡ç®—
             if (ifcomputed[follower_upper_bound_ordered_edge[i].eid] == true)
             {
                 if (number[follower_upper_bound_ordered_edge[i].eid] > max)
@@ -1742,7 +1741,7 @@ vector<int> GAS(Graph& G, int b)   //°üº¬ÁËtree£¬path£¬ºÍcandidate¼ôÖ¦ºÍupper bo
             int follower_number = 0;
 
             follower_number = number[follower_upper_bound_ordered_edge[i].eid];
-            for (auto iter = followers.begin(); iter != followers.end(); ++iter)  //´¦Àífollowers
+            for (auto iter = followers.begin(); iter != followers.end(); ++iter)  //å¤„ç†followers
             {
                 collected_followers[follower_upper_bound_ordered_edge[i].eid][iter->first] = iter->second;
                 follower_number = follower_number + iter->second.size();
@@ -1760,13 +1759,13 @@ vector<int> GAS(Graph& G, int b)   //°üº¬ÁËtree£¬path£¬ºÍcandidate¼ôÖ¦ºÍupper bo
                 //cout << max;
             }
 
-            //Êä³ö±¾ÂÖµÄ¼ÆËã½ø¶È
+            //è¾“å‡ºæœ¬è½®çš„è®¡ç®—è¿›åº¦
             //if (i % 200000 == 0) cout << i << " " << std::flush;
             //if (i % 1000000 == 0) cout << endl;
         }
         cout << endl;
 
-        if (select == -1) break;  //Ã¿Ìõ±ß¶¼Ã»ÓĞfollowers£¬Ö±½Ó·µ»Ø
+        if (select == -1) break;  //æ¯æ¡è¾¹éƒ½æ²¡æœ‰followersï¼Œç›´æ¥è¿”å›
 
         trussness_gain = trussness_gain + max;
         cout << select << endl;
@@ -1798,13 +1797,13 @@ vector<int> GAS(Graph& G, int b)   //°üº¬ÁËtree£¬path£¬ºÍcandidate¼ôÖ¦ºÍupper bo
         //reuseable_node = follower_reuse(select, &G, &Tree, &SLA_PLA, &LA, &containing_e, selected_followers);
         //auto aaa = std::chrono::high_resolution_clock::now();
         //t = t + std::chrono::duration_cast<std::chrono::microseconds>(aaa - aaaa).count();
-        int partical = 0;
-        int full = 0;
-        int unreuse = 0;
-        //// Í³¼ÆreuseableµÄµã
+        //int partical = 0;
+        //int full = 0;
+        //int unreuse = 0;
+        //// ç»Ÿè®¡reuseableçš„ç‚¹
         //for (int i = 0; i < G.m; i++)
         //{
-        //    int reuse = 0;  //Í³¼ÆÄÜreuseµÄnode
+        //    int reuse = 0;  //ç»Ÿè®¡èƒ½reuseçš„node
 
         //    for (int j = 0; j < SLA_PLA[i].first.size(); j++)
         //    {
@@ -1829,20 +1828,20 @@ vector<int> GAS(Graph& G, int b)   //°üº¬ÁËtree£¬path£¬ºÍcandidate¼ôÖ¦ºÍupper bo
 
 
 
-        for (int i = 0; i < res.size(); i++)   //½«ÒÑ¾­anchorµÄhull pair ÖµÉèÖÃÎªinifinity
+        for (int i = 0; i < res.size(); i++)   //å°†å·²ç»anchorçš„hull pair å€¼è®¾ç½®ä¸ºinifinity
         {
             hull_pair[res[i]].first = INF;
             hull_pair[res[i]].second = INF;
         }
 
 
-        // µ÷ÕûÊ÷½á¹¹ÒÔ¼°Ïà¹ØÊı¾İ½á¹¹  °Ñ²»ÄÜreuseµÄresultÉ¾µô
+        // è°ƒæ•´æ ‘ç»“æ„ä»¥åŠç›¸å…³æ•°æ®ç»“æ„  æŠŠä¸èƒ½reuseçš„resultåˆ æ‰
         for (int i = 0; i < G.m; i++)
         {
             vector<int> del;
             for (auto iter = collected_followers[i].begin(); iter != collected_followers[i].end(); iter++)
             {
-                //ÈôÊ÷µÄid±äÁË£¬»òÕß²»ÄÜreuse£¬Ôò´Ó½á¹û¼¯ÖĞÉ¾³ı
+                //è‹¥æ ‘çš„idå˜äº†ï¼Œæˆ–è€…ä¸èƒ½reuseï¼Œåˆ™ä»ç»“æœé›†ä¸­åˆ é™¤
                 if (Tree.find(iter->first) == Tree.end() || reuseable_node[i].find(iter->first) == reuseable_node[i].end())
                 {
                     del.push_back(iter->first);
@@ -1859,7 +1858,7 @@ vector<int> GAS(Graph& G, int b)   //°üº¬ÁËtree£¬path£¬ºÍcandidate¼ôÖ¦ºÍupper bo
 
 
 
-        for (int i = 0; i < G.m; i++)//½«²»ÄÜreuseµÄ²¿·Ö ifproccessÉèÖÃÎªfalse£¬ÖØĞÂ¼ÆËã
+        for (int i = 0; i < G.m; i++)//å°†ä¸èƒ½reuseçš„éƒ¨åˆ† ifproccessè®¾ç½®ä¸ºfalseï¼Œé‡æ–°è®¡ç®—
         {
             if (ifcomputed[i] == false)
             {
