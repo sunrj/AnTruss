@@ -17,7 +17,7 @@ int main(){
     
         Graph p1;
         char dataset[100];
-        char* a = "src/datasets/graphname+.txt";
+        const char* a = "src/datasets/graphname+.txt";
 
         strcpy(dataset, a);
         //cout<<strlen(dataset)<<endl;
