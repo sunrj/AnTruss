@@ -13,8 +13,13 @@ Each algorithm has only two parameter, graph G and budget b.
   Take **GAS** as an example, we first replace the datasets which is need to be tested, and set budget in main.cpp.
   > g++ -std=c++11 main.cpp -o program -I.
   >
-  > ./GAS 
+  > ./GAS
+  > 
+## Running Enviroment
 
+Software: Ubuntu 22.04.4 LTS, kernel version 5.15.0-72-generic, GCC 8.5.0, Python 3.
+
+Hardware: Intel(R)Xeon(R)5218R 2.10GHz CPU and 256GB memory.
 
 ## Datasets
 
