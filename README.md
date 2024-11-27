@@ -15,7 +15,7 @@ Each algorithm has only two parameter, graph G and budget b.
   >
   > ./GAS
   > 
-## Running Enviroment
+## Dependencies :
 
 Software: Ubuntu 22.04.4 LTS, kernel version 5.15.0-72-generic, GCC 8.5.0, Python 3.
 
