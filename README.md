@@ -28,7 +28,4 @@ The source code of each algorithm has five parameters, corresponding to the algo
 
 ToWe provide five datasets in the folder "sample_dataset" for testing, D1 to D8.
 
-| Dataset  |   |V|    |   |E|    |   Link    |
-|----------|----------|----------|-----------|
-| College  | Data     | Data     |   |E|     |
-| Row 2    | Data     | Data     |   |E|     |
+
