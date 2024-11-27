@@ -28,4 +28,4 @@ The source code of each algorithm has five parameters, corresponding to the algo
 
 To save space, we only provide four datasets in the folder "dataset" for testing, other datasets can be found on https://snap.stanford.edu/data/index.html
 
-
+Folder "datasets/subgraphs" contains 20 subgraphs that extracted from facebook and brightkites.
