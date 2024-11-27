@@ -4,24 +4,16 @@ This folder contains all codes of paper "Enhance Stability of Network by Edge An
 
 ## Running Format
 
-We list the algorithms in the paper, four random algorithms (Exact, Rand, Sup, Tur) and three greedy algorithms (Base, Base+, GAS).
+We list the algorithms in the paper, four random algorithms (**Exact**, **Rand**, **Sup**, **Tur**) and three greedy algorithms (**Base**, **Base+**, **GAS**).
 
-* Running example for Algorithms **VFree** and **VFree-**
+Each algorithm has only two parameter, graph G and budget b.
 
-  Take **VFree** as an example, on dataset **D5** with parameters $\tau_U$ = **5**, $\tau_V$ = **4** and &lambda; = **3**
+* Running example for Algorithms GAS
 
-  > g++ -std=c++11 RecurrenceGroup.cpp -O3 -o VFree
+  Take **GAS** as an example, we first replace the datasets which is need to be tested, and set budget in main.cpp.
+  > g++ -std=c++11 GAS.cpp -O3 -o GAS
   >
-  > ./VFree VFree D5 5 4 3
-
-
-* Running example for Algorithms **FilterV**, **FilterV-**, **FilterV-FR**, **FilterV-VM** and **BK-ALG+**
-
-  Take **FilterV** as an example, on dataset **D5** with parameters $\tau_U$ = **5**, $\tau_V$ = **4** and &lambda; = **3**
-
-  > g++ -std=c++11 main.cpp graph.cpp -O3 -o FilterV
-  >
-  > ./FilterV FilterV D5 5 4 3
+  > ./GAS GAS
 
 
 ## Datasets
