@@ -1,7 +1,5 @@
 # AnchorEdge
 
-This folder contains all codes of paper "Enhance Stability of Network by Edge Anchor".
-
 ## Running Format
 
 We list the algorithms in the paper, four random algorithms (**Exact**, **Rand**, **Sup**, **Tur**) and three greedy algorithms (**Base**, **Base+**, **GAS**).
