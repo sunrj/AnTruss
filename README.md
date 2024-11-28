@@ -4,7 +4,7 @@
 
 The source code of our paper are in the folder "src".
 
-Each algorithm has only two parameter, graph G and budget b.
+The source code of each algorithm has two parameters: graph $G$ and budget $b$.
 
 * Running example for Algorithms GAS
 
