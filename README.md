@@ -2,7 +2,7 @@
 
 ## Running Format
 
-We list the algorithms in the paper, four random algorithms (**Exact**, **Rand**, **Sup**, **Tur**) and three greedy algorithms (**Base**, **Base+**, **GAS**).
+The source code of our paper are in the folder "src".
 
 Each algorithm has only two parameter, graph G and budget b.
 
