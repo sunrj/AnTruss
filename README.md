@@ -10,7 +10,9 @@ The source code of each algorithm has two parameters: graph $G$ and budget $b$.
 
   Take **GAS** as an example, we first replace the datasets which is need to be tested, and set budget in main.cpp.
   > g++ -std=c++11 main.cpp -o GAS -I.(without compiler optimization)
+  > 
   > g++ -std=c++11 -O3 -I. main.cpp -o GAS.(with compiler optimization)
+  > 
   > ./GAS
   > 
 ## Dependencies 
