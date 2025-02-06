@@ -396,7 +396,7 @@ bool cmp(edge_with_upperbound x, edge_with_upperbound y) {
 vector<int> Get_treenode_containing_e(std::unordered_map<int, TreeNode>& Tree, Graph& G)  // 获取每条边所在的treenode id                              //获得数据结构:包含边e的树id
 {
     //auto aaaa = std::chrono::high_resolution_clock::now();
-    //cout << "fffkcu" << endl;
+    
     vector<int> res(G.m + 1);   //初始化一个大小为图的边数量的res集合
     for (const auto& pair : Tree)
     {
